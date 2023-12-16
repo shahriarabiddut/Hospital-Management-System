@@ -1,11 +1,11 @@
 @extends('staff/layout')
-@section('title', 'Appointments')
+@section('title', 'Patient')
 
 @section('content')
 
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Appointments Index</h1>
+    <h1 class="h3 mb-2 text-gray-800">Patients</h1>
             <!-- Session Messages Starts -->
             @if(Session::has('success'))
             <div class="p-3 mb-2 bg-success text-white">
@@ -21,8 +21,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Appointments Data
-            <a href="{{ route('staff.appointment.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h6>
+            <h6 class="m-0 font-weight-bold text-primary">Patient Data
+            <a href="{{ route('staff.patient.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New </a> </h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -30,48 +30,42 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Patient</th>
-                            <th>Purpose</th>
-                            <th>Department</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Bill</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>#</th>
-                            <th>Patient</th>
-                            <th>Purpose</th>
-                            <th>Department</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Bill</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @if($data)
-                        @foreach ($data as $key => $d)
+                        @foreach ($data as $key=> $d)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $d->patient->name }} ( {{ $d->patient->mobile }})</td>
-                            <td>{{ $d->purpose }}</td>
-                            <td>{{ $d->dept->title }}</td>
-                            <td>{{ $d->date }}</td>
-                            <td>{{ $d->time }}</td>
-                            @if ($d->bill->status==0)
-                            <td class="bg-danger text-white"> Due
-                            @else
-                            <td class="bg-success text-white"> Paid
-                            @endif
+                            <td><img width="100"
+                                class=""
+                                src="{{$d->photo ? asset('storage/'.$d->photo) : url('images/user.png')}}"
+                                alt=""
+                            /></td>
+                            <td>{{ $d->name }}</td>
+                            <td>{{ $d->email }}</td>
+                            <td>{{ $d->mobile }}</td>
                             
-                            </td>
                             
                             <td class="text-center">
-                                <a onclick="return confirm('Are You Sure?')" href="{{ route('staff.appointment.show',$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-print"></i> View </a>
-                                <a onclick="return confirm('Are You Sure?')" href="{{ url('staff/appointment/'.$d->id.'/delete') }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                <a href="{{ url('staff/patient/'.$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                                <a href="{{ url('staff/patient/'.$d->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                <a onclick="return confirm('Are You Sure?')" href="{{ url('staff/patient/'.$d->id.'/delete') }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             </td>
 
                         </tr>

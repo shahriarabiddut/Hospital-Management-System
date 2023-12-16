@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->int('patient_id')->references('id')->on('users');
+            $table->integer('patient_id')->references('id')->on('users');
             $table->string('service_type');
-            $table->int('service_id')->nullable();
-            $table->int('price');
-            $table->int('status');
+            $table->integer('service_id')->nullable();
+            $table->integer('price');
+            $table->integer('status');
             $table->timestamps();
         });
     }

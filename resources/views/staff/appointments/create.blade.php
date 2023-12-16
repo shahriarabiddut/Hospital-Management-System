@@ -43,6 +43,16 @@
                                     </select></td>
                         </tr>
                     <tr>
+                        <tr>
+                            <th>Doctor <span class="text-danger">*</span></th>
+                                <td><select required name="doctor" class="form-control room-list">
+                                        <option value="0">Select Doctor</option>
+                                        @foreach ($doctors as $doctor)
+                                        <option value="{{ $doctor->id }}"> {{ $doctor->name }} </option>
+                                        @endforeach
+                                        </select></td>
+                            </tr>
+                        <tr>
                     <tr>
                         <th>Date</th>
                         <td><input name="date" type="date" min="{{ $nextDate }}" required class="form-control"></td>

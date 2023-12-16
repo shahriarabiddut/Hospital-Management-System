@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('operations', function (Blueprint $table) {
             $table->id();
-            $table->int('patient_id')->references('id')->on('users');
-            $table->int('doctor_id')->references('id')->on('staff');
-            $table->int('admission_id')->references('id')->on('admissions');
+            $table->integer('patient_id')->references('id')->on('users');
+            $table->integer('doctor_id')->references('id')->on('staff');
+            $table->integer('admission_id')->references('id')->on('admissions');
             $table->string('ot_type');
             $table->date('date');
             $table->string('instruction');

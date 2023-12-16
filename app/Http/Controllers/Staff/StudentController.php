@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Staff;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class StudentController extends Controller
     public function index()
     {
         $data = Student::all();
-        return view('admin.patient.index', ['data' => $data]);
+        return view('staff.patient.index', ['data' => $data]);
     }
 
     /**
@@ -25,7 +25,7 @@ class StudentController extends Controller
     public function create()
     {
         //
-        return view('admin.patient.create');
+        return view('staff.patient.create');
     }
 
     /**
@@ -34,7 +34,8 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //
-        $formFields = $request->validate([
+        $data = new Student();
+        $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users|regex:/(.+)@(.+)\.(.+)/i',
             'password' => 'required | min:6',
@@ -45,22 +46,25 @@ class StudentController extends Controller
 
         //If user Gieven address
         if ($request->has('address')) {
-            $formFields['address'] = $request->address;
+            $data->address = $request->address;
         }
         //If user Gieven any PHOTO
         if ($request->hasFile('photo')) {
-            $formFields['photo'] = $request->file('photo')->store('PatientPhoto', 'public');
+            $data->photo = $request->file('photo')->store('PatientPhoto', 'public');
         }
         //If user Gieven any PHOTO
         if ($request->hasFile('prescription')) {
-            $formFields['prescription'] = $request->file('prescription')->store('Prescription', 'public');
+            $data->prescription = $request->file('prescription')->store('Prescription', 'public');
         }
-        //Hash Password
-        $formFields['password'] = bcrypt(($formFields['password']));
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->password = bcrypt($request->password);
+        $data->mobile = $request->mobile;
+        $data->guardian = $request->guardian;
+        $data->dob = $request->dob;
+        $data->save();
 
-        Student::create($formFields);
-        $ref = $request->ref;
-        return redirect('admin/patient')->with('success', 'Data has been added Successfully!');
+        return redirect('staff/patient')->with('success', 'Data has been added Successfully!');
     }
 
     /**
@@ -70,7 +74,7 @@ class StudentController extends Controller
     {
         //
         $data = Student::find($id);
-        return view('admin.patient.show', ['data' => $data]);
+        return view('staff.patient.show', ['data' => $data]);
     }
 
     /**
@@ -80,7 +84,7 @@ class StudentController extends Controller
     {
         //
         $data = Student::find($id);
-        return view('admin.patient.edit', ['data' => $data]);
+        return view('staff.patient.edit', ['data' => $data]);
     }
 
     /**
@@ -108,7 +112,7 @@ class StudentController extends Controller
         }
 
         $data->update($formFields);
-        return redirect('admin/patient')->with('success', 'Data has been updated Successfully!');
+        return redirect('staff/patient')->with('success', 'Data has been updated Successfully!');
     }
 
     /**
@@ -118,6 +122,6 @@ class StudentController extends Controller
     {
         $data = Student::find($id);
         $data->delete();
-        return redirect('admin/patient')->with('danger', 'Data has been deleted Successfully!');
+        return redirect('staff/patient')->with('danger', 'Data has been deleted Successfully!');
     }
 }

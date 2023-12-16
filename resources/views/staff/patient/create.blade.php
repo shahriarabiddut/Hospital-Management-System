@@ -1,4 +1,4 @@
-@extends('admin/layout')
+@extends('staff/layout')
 @section('title', 'Add New Patient')
 @section('content')
 
@@ -10,7 +10,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Add New Patient
-            <a href="{{ url('admin/patient') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left"></i> View All </a> </h6>
+            <a href="{{ url('staff/patient') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left"></i> View All </a> </h6>
         </div>
         <div class="card-body">
             
@@ -20,7 +20,7 @@
                    <p class="text-danger"> {{ $error }} </p>
                 @endforeach
                 @endif
-            <form method="POST" action="{{ route('admin.patient.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('staff.patient.store') }}" enctype="multipart/form-data">
                 @csrf
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <tbody>

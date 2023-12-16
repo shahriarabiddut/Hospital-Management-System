@@ -23,6 +23,7 @@ Admin CRUD for Students and Staff
 Database Created
 
 1. Appointment CRUD
+   1.1 Appointment Bill and Print Done!
 
 ## Laravel Sponsors
 

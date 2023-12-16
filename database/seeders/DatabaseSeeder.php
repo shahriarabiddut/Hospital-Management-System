@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(DepartmentSeeder::class);
         $this->call(StaffSeeder::class);
-        $this->call(StudentSeeder::class);
         $this->call(SiteOptionSeeder::class);
     }
 }

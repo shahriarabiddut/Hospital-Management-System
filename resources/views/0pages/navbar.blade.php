@@ -37,9 +37,7 @@
     
                     <div class="navbar-brand">
                     <a href="{{ route('root') }}">
-                        @isset($SiteOption)
-                        <img src="{{ asset($SiteOption[1]->value) }}" alt="Logo" srcset="" width="100%">
-                        @endisset
+                        @isset($SiteOption){{ $SiteOption[0]->value }}@endisset
                     </a>
                     </div>
                     </div><!--/end responsive container-->

@@ -61,6 +61,27 @@
             </div>
         </div>
     </li>
+    <div class="sidebar-heading">
+        Patient Management
+    </div>
+    <!-- Nav Item Patient - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link @if (!request()->is('student/pateint*'))
+            collapsed
+        @endif" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Patient</span>
+        </a>
+        <div id="collapseTwo" class="collapse @if(request()->is('staff/pateint*')) show @endif" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Patient Management</h6>
+                <a class="collapse-item" href="{{ route('staff.patient.index') }}">View All</a>
+                <a class="collapse-item" href="{{ route('staff.patient.create') }}">Add new</a>
+            </div>
+        </div>
+    </li>
     <!-- Nav Item Support - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link @if (!request()->is('student/appointment*'))

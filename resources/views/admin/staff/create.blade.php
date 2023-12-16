@@ -1,16 +1,15 @@
 @extends('admin/layout')
-@section('title', 'Create New Staff')
+@section('title', 'Add New Staff')
 @section('content')
 
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Create New Staff</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Add New Staff
-            <a href="{{ url('admin/staff') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left"></i> View All </a> </h6>
+            <h3 class="m-0 font-weight-bold text-primary">Add New Staff
+            <a href="{{ url('admin/staff') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left"></i> View All </a> </h3>
         </div>
         <div class="card-body">
             
@@ -48,20 +47,24 @@
                         <td><input required name="name" type="text" class="form-control"></td>
                     </tr><tr>
                         <th>Photo</th>
-                        <td><input name="photo" type="file"></td>
+                        <td><input required name="photo" type="file"></td>
                     </tr><tr>
-                        <th>Bio</th>
-                        <td><textarea name="bio" class="form-control"></textarea></td>
-                    </tr><tr>
-                        <th>Salary Type <span class="text-danger">*</span></th>
+                        <th>Type <span class="text-danger">*</span></th>
                         <td>
-                            <input required name="salary_type" type="radio" value="daily"> Daily
-                            <input required name="salary_type" type="radio" value="monthly"> Monthly
+                            <select required name="type" id="" class="form-control">
+                                <option value="staff" selected>Staff</option>  
+                                <option value="nurse">Nurse</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="technician">Technician</option>
+                            </select>
                         
                         </td>
                     </tr><tr>
-                        <th>Salary Amount<span class="text-danger">*</span></th>
-                        <td><input required name="salary_amount" type="text" class="form-control"></td>
+                        <th>Mobile<span class="text-danger">*</span></th>
+                        <td><input required name="mobile" type="text" class="form-control"></td>
+                    </tr><tr>
+                        <th>Address</th>
+                        <td><textarea name="address" class="form-control">N/A</textarea></td>
                     </tr>
                     <tr>
                         <td colspan="2">

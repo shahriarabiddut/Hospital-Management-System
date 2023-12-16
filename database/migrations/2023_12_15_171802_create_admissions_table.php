@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('admissions', function (Blueprint $table) {
             $table->id();
-            $table->int('patient_id')->references('id')->on('users');
-            $table->int('doctor_id')->references('id')->on('staff');
-            $table->int('nurse_id')->references('id')->on('staff');
+            $table->integer('patient_id')->references('id')->on('users');
+            $table->integer('doctor_id')->references('id')->on('staff');
+            $table->integer('nurse_id')->references('id')->on('staff');
             $table->string('accomodation_type');
             $table->string('room_id')->references('id')->on('rooms');
             $table->date('check_in');

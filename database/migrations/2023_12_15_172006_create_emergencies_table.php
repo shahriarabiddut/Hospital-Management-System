@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('emergencies', function (Blueprint $table) {
             $table->id();
-            $table->int('patient_id')->references('id')->on('users');
+            $table->integer('patient_id')->references('id')->on('users');
             $table->string('emergency');
             $table->timestamps();
         });

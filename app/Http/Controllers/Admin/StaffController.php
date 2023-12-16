@@ -18,7 +18,7 @@ class StaffController extends Controller
     public function index()
     {
         $data = Staff::all();
-        return view('admin.staff.index',['data'=>$data]);
+        return view('admin.staff.index', ['data' => $data]);
     }
 
     /**
@@ -28,7 +28,7 @@ class StaffController extends Controller
     {
         //
         $departs = Department::all();
-        return view('admin.staff.create',['departs'=>$departs]);
+        return view('admin.staff.create', ['departs' => $departs]);
     }
 
     /**
@@ -44,26 +44,23 @@ class StaffController extends Controller
             'password' => 'required',
             'name' => 'required',
             'department_id' => 'required',
-            'bio' => 'required',
-            'salary_type' => 'required',
-            'salary_amount' => 'required',
+            'type' => 'required',
+            'address' => 'required',
             'photo' => 'required',
         ]);
-        $imgpath = $request->file('photo')->store('StaffPhoto','public');
+        $imgpath = $request->file('photo')->store('StaffPhoto', 'public');
 
         $data->name = $request->name;
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
         $data->department_id = $request->department_id;
         $data->photo = $imgpath;
-        $data->bio = $request->bio;
-        $data->salary_type = $request->salary_type;
-        $data->salary_amount = $request->salary_amount;
+        $data->type = $request->type;
+        $data->address = $request->address;
 
         $data->save();
 
-        return redirect('admin/staff')->with('success','Staff Data has been added Successfully!');
-        
+        return redirect('admin/staff')->with('success', 'Staff Data has been added Successfully!');
     }
 
     /**
@@ -73,7 +70,7 @@ class StaffController extends Controller
     {
         //
         $data = Staff::find($id);
-        return view('admin.staff.show',['data'=>$data]);
+        return view('admin.staff.show', ['data' => $data]);
     }
 
     /**
@@ -84,7 +81,7 @@ class StaffController extends Controller
         //
         $departs = Department::all();
         $data = Staff::find($id);
-        return view('admin.staff.edit',['data'=>$data,'departs'=>$departs]);
+        return view('admin.staff.edit', ['data' => $data, 'departs' => $departs]);
     }
 
     /**
@@ -101,23 +98,22 @@ class StaffController extends Controller
             'salary_type' => 'required',
             'salary_amount' => 'required',
         ]);
-        
+
         $data->name = $request->name;
         $data->department_id = $request->department_id;
         $data->bio = $request->bio;
         $data->salary_type = $request->salary_type;
         $data->salary_amount = $request->salary_amount;
         //If user Gieven any PHOTO
-        if($request->hasFile('photo')){
-            $imgpath = $request->file('photo')->store('StaffPhoto','public');
-        }else{
+        if ($request->hasFile('photo')) {
+            $imgpath = $request->file('photo')->store('StaffPhoto', 'public');
+        } else {
             $imgpath = $request->prev_photo;
         }
         $data->photo = $imgpath;
         $data->save();
 
-        return redirect('admin/staff')->with('success','Staff Data has been updated Successfully!');
-        
+        return redirect('admin/staff')->with('success', 'Staff Data has been updated Successfully!');
     }
 
     /**
@@ -127,16 +123,15 @@ class StaffController extends Controller
     {
         $data = Staff::find($id);
         $data->delete();
-        return redirect('admin/staff')->with('danger','Data has been deleted Successfully!');
-
+        return redirect('admin/staff')->with('danger', 'Data has been deleted Successfully!');
     }
-    
+
     public function change(string $id)
     {
         //
         $departs = Department::all();
         $data = Staff::find($id);
-        return view('admin.staff.change',['data'=>$data,'departs'=>$departs]);
+        return view('admin.staff.change', ['data' => $data, 'departs' => $departs]);
     }
 
     /**
@@ -149,15 +144,13 @@ class StaffController extends Controller
         $request->validate([
             'email' => 'required',
             'password' => 'required',
-            
+
         ]);
-        
+
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
         $data->save();
 
-        return redirect('admin/staff')->with('success','Staff Email & Password has been updated Successfully!');
-        
+        return redirect('admin/staff')->with('success', 'Staff Email & Password has been updated Successfully!');
     }
-
 }

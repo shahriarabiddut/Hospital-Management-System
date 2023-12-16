@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
-            $table->int('patient_id')->references('id')->on('users');
-            $table->int('doctor_id')->references('id')->on('staff');
-            $table->int('admission_id')->references('id')->on('admissions');
+            $table->integer('patient_id')->references('id')->on('users');
+            $table->integer('doctor_id')->references('id')->on('staff');
+            $table->integer('admission_id')->references('id')->on('admissions');
             $table->string('diagnosis');
             $table->string('prescription');
-            $table->int('price');
-            $table->int('status');
+            $table->integer('price');
+            $table->integer('status');
             $table->timestamps();
         });
     }

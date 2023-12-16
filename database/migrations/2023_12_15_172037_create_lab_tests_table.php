@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('lab_tests', function (Blueprint $table) {
             $table->id();
-            $table->int('patient_id')->references('id')->on('users');
-            $table->int('technician_id')->references('id')->on('staff');
+            $table->integer('patient_id')->references('id')->on('users');
+            $table->integer('technician_id')->references('id')->on('staff');
             $table->string('name');
             $table->string('normalrange');
-            $table->int('price');
+            $table->integer('price');
             $table->timestamps();
         });
     }
