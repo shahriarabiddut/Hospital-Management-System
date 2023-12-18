@@ -1,6 +1,5 @@
 @extends('staff/layout')
-@section('title', 'Appointments')
-
+@section('title', 'Lab Tests')
 @section('content')
 
             <!-- Session Messages Starts -->
@@ -18,8 +17,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">Appointments 
-            <a href="{{ route('staff.appointment.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h3>
+            <h3 class="m-0 font-weight-bold text-primary">Lab Tests Data
+            <a href="{{ route('staff.labtest.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h3>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -28,11 +27,11 @@
                         <tr>
                             <th>#</th>
                             <th>Patient</th>
-                            <th>Purpose</th>
-                            <th>Department</th>
+                            <th>Technician</th>
+                            <th>Test</th>
                             <th>Date</th>
-                            <th>Time</th>
                             <th>Bill</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -40,11 +39,11 @@
                         <tr>
                             <th>#</th>
                             <th>Patient</th>
-                            <th>Purpose</th>
-                            <th>Department</th>
+                            <th>Technician</th>
+                            <th>Test</th>
                             <th>Date</th>
-                            <th>Time</th>
                             <th>Bill</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -53,11 +52,11 @@
                         @foreach ($data as $key => $d)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $d->patient->name }} ( {{ $d->patient->mobile }})</td>
-                            <td>{{ $d->purpose }}</td>
-                            <td>{{ $d->dept->title }}</td>
+                            <td>{{ $d->patient->name }} - ( {{ $d->patient->mobile }})</td>
+                            <td>{{ $d->technician->name }}</td>
+                            <td>{{ $d->test->name }}</td>
                             <td>{{ $d->date }}</td>
-                            <td>{{ $d->time }}</td>
+                            <td>{{ $d->bill->price }}</td>
                             @if ($d->bill->status==0)
                             <td class="bg-danger text-white"> Due
                             @else
@@ -66,11 +65,11 @@
                             
                             </td>
                             
-                            <td width="20%" class="text-center">
-                                <a href="{{ route('staff.appointment.show',$d->id) }}" class="btn btn-info btn-sm "><i class="fa fa-print"></i> View </a>
-                                <a onclick="return confirm('Are You Sure?')" href="{{ route('staff.appointment.delete',$d->id)  }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            <td class="text-center">
+                                <a href="{{ route('staff.labtest.show',$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-print"></i> View </a>
+                                <a href="{{ route('staff.labtest.edit',$d->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pen"></i> Update Result </a>
+                                <a onclick="return confirm('Are You Sure?')" href="{{ route('staff.labtest.delete',$d->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             </td>
-
                         </tr>
                         @endforeach
                         @endif

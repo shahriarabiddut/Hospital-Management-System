@@ -21,6 +21,11 @@ class Staff extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile',
+        'department_id',
+        'type',
+        'address',
+
     ];
 
     /**
@@ -42,7 +47,8 @@ class Staff extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function department(){
+    function department()
+    {
         return $this->belongsTo(Department::class);
     }
 }

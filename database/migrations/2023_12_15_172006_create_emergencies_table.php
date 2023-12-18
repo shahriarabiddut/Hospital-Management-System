@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('emergencies', function (Blueprint $table) {
             $table->id();
             $table->integer('patient_id')->references('id')->on('users');
+            $table->integer('doctor_id')->references('id')->on('staff');
+            $table->integer('department_id')->references('id')->on('departments');
             $table->string('emergency');
             $table->timestamps();
         });

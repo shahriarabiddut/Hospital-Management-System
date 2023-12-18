@@ -15,9 +15,17 @@ return new class extends Migration
             $table->id();
             $table->integer('patient_id')->references('id')->on('users');
             $table->integer('technician_id')->references('id')->on('staff');
-            $table->string('name');
-            $table->string('normalrange');
-            $table->integer('price');
+            $table->integer('test_id')->references('id')->on('tests');
+            $table->string('result1')->nullable();
+            $table->string('result2')->nullable();
+            $table->string('result3')->nullable();
+            $table->string('result4')->nullable();
+            $table->string('result5')->nullable();
+            $table->string('result6')->nullable();
+            $table->string('result7')->nullable();
+            $table->string('result8')->nullable();
+            $table->string('result9')->nullable();
+            $table->string('result10')->nullable();
             $table->timestamps();
         });
     }

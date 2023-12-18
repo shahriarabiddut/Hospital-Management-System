@@ -24,6 +24,26 @@
     <hr class="sidebar-divider">
     <!-- Heading -->
     <div class="sidebar-heading">
+        Hospital Management
+   </div>
+   <!-- Nav Item Customer - Pages Collapse Menu -->
+   <li class="nav-item">
+       <a class="nav-link @if(!request()->is('admin/test*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapsetest"
+           aria-expanded="true" aria-controls="collapsetest">
+           <i class="fas fa-fw fa-users"></i>
+           <span>Test</span>
+       </a>
+       <div id="collapsetest" class="collapse @if(request()->is('admin/test*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+           <div class="bg-white py-2 collapse-inner rounded">
+               <h6 class="collapse-header">Test Management</h6>
+               <a class="collapse-item" href="{{ route('admin.test.index') }}">View All</a>
+               <a class="collapse-item" href="{{ route('admin.test.create') }}">Add new </a>
+           </div>
+       </div>
+   </li>
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
          User System
     </div>
     <!-- Nav Item Customer - Pages Collapse Menu -->

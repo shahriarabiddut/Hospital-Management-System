@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\TestController;
 
 //Admin
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
@@ -41,7 +42,10 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('department/{id}/delete', [StaffDepartmentController::class, 'destroy']);
     Route::resource('department', StaffDepartmentController::class);
 
-    // Staff 
+    // Test Crud 
+    Route::get('test/{id}/delete', [TestController::class, 'destroy'])->name('test.delete');
+    Route::resource('test', TestController::class);
+
     // Staff Crud
     Route::get('staff/{id}/delete', [StaffController::class, 'destroy']);
     Route::get('staff/{id}/change', [StaffController::class, 'change']);

@@ -1,6 +1,5 @@
-@extends('staff/layout')
-@section('title', 'Appointments')
-
+@extends('admin/layout')
+@section('title', 'Test')
 @section('content')
 
             <!-- Session Messages Starts -->
@@ -18,8 +17,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">Appointments 
-            <a href="{{ route('staff.appointment.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h3>
+            <h6 class="m-0 font-weight-bold text-primary">Test Data
+            <a href="{{ route('admin.test.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -27,24 +26,14 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Patient</th>
-                            <th>Purpose</th>
-                            <th>Department</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Bill</th>
+                            <th>Name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>#</th>
-                            <th>Patient</th>
-                            <th>Purpose</th>
-                            <th>Department</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Bill</th>
+                            <th>Name</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -53,22 +42,12 @@
                         @foreach ($data as $key => $d)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $d->patient->name }} ( {{ $d->patient->mobile }})</td>
-                            <td>{{ $d->purpose }}</td>
-                            <td>{{ $d->dept->title }}</td>
-                            <td>{{ $d->date }}</td>
-                            <td>{{ $d->time }}</td>
-                            @if ($d->bill->status==0)
-                            <td class="bg-danger text-white"> Due
-                            @else
-                            <td class="bg-success text-white"> Paid
-                            @endif
+                            <td>{{ $d->name }}</td>
                             
-                            </td>
-                            
-                            <td width="20%" class="text-center">
-                                <a href="{{ route('staff.appointment.show',$d->id) }}" class="btn btn-info btn-sm "><i class="fa fa-print"></i> View </a>
-                                <a onclick="return confirm('Are You Sure?')" href="{{ route('staff.appointment.delete',$d->id)  }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            <td class="text-center">
+                                <a href="{{ url('admin/test/'.$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                                <a href="{{ url('admin/test/'.$d->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                <a onclick="return confirm('Are You Sure?')" href="{{ url('admin/test/'.$d->id.'/delete') }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             </td>
 
                         </tr>

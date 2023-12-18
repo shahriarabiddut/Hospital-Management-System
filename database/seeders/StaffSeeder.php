@@ -22,32 +22,36 @@ class StaffSeeder extends Seeder
                 'password' => bcrypt('Password'),
                 'type' => 'nurse',
                 'mobile' => '01945506778',
-                'address' => 'address'
+                'address' => 'address',
+                'fee' => '0'
             ],
             [
                 'department_id' => '2',
-                'name' => 'Staff 2',
+                'name' => 'Doctor',
                 'email' => 'staff2@gmail.com',
                 'password' => bcrypt('Password'),
                 'type' => 'doctor',
                 'mobile' => '01945506778',
-                'address' => 'address'
+                'address' => 'address',
+                'fee' => '500'
             ], [
                 'department_id' => '3',
-                'name' => 'Staff 3',
+                'name' => 'Technician',
                 'email' => 'staff3@gmail.com',
                 'password' => bcrypt('Password'),
                 'type' => 'technician',
                 'mobile' => '01945506778',
-                'address' => 'address'
+                'address' => 'address',
+                'fee' => '0'
             ], [
                 'department_id' => '4',
                 'name' => 'Staff 4',
                 'email' => 'staff4@gmail.com',
                 'password' => bcrypt('Password'),
-                'type' => 'staff',
+                'type' => 'doctor',
                 'mobile' => '01945506778',
-                'address' => 'address'
+                'address' => 'address',
+                'fee' => '1000'
             ], [
                 'department_id' => '5',
                 'name' => 'Staff 5',
@@ -55,7 +59,8 @@ class StaffSeeder extends Seeder
                 'password' => bcrypt('Password'),
                 'type' => 'staff',
                 'mobile' => '01945506778',
-                'address' => 'address'
+                'address' => 'address',
+                'fee' => '0'
             ],
 
         ];

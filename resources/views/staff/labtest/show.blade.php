@@ -1,17 +1,17 @@
 @extends('staff/layout')
-@section('title', 'Appointment Details')
+@section('title', 'Lab Test Details')
 @section('content')
 
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">Appointment Details
-            <a href="{{ url('staff/appointment') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left mx-1"></i> View All </a>       
+            <h3 class="m-0 font-weight-bold text-primary">Lab Test Details
+            <a href="{{ route('staff.labtest.index') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left mx-1"></i> View All </a>       
             @if ($data->bill->status==1)
             <button onClick="printdiv('printable_div_id');" class="float-right btn btn-success btn-sm mx-1"><i class="fa fa-print"> Print </i></button>
             @else
-            <a href="{{ route('staff.appointment.bill',$data->id) }}" class="float-right btn btn-success btn-sm mx-1"><i class="fa fa-check"> Pay </i></a> 
+            <a href="{{ route('staff.labtest.bill',$data->id) }}" class="float-right btn btn-success btn-sm mx-1"><i class="fa fa-check"> Pay </i></a> 
             @endif
         </h3>
         </div>
@@ -19,26 +19,21 @@
             
             <div class="table-responsive" id='printable_div_id'>
                 <table class="table table-bordered" width="100%">
+                    <th>Test Name </th>
+                        <td><h3>{{ $data->test->name }}</h3></td>
+                    </tr>
                     <tr>
-                    <th>Full Name </th>
+                    <th>Patient Name </th>
                         <td>{{ $data->patient->name }}</td>
                     </tr>
                     <tr>
-                        <th>Department </th>
-                            <td>{{ $data->dept->title }}</td>
-                        </tr>
-                    <tr>
-                        <th>Doctor </th>
-                            <td>{{ $data->doc->name }}</td>
+                        <th>Technician </th>
+                            <td>{{ $data->technician->name }}</td>
                         </tr>
                     <tr>
                     <tr>
                         <th>Date </th>
                             <td>{{ $data->date}}</td>
-                    </tr>
-                    <tr>
-                        <th>Time </th>
-                            <td>{{ $data->time}}</td>
                     </tr>
                     <tr>
                         <th>Bill Status </th>
@@ -50,8 +45,41 @@
                     </tr>
                 </table>
             </div>
+            
         </div>
     </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h3 class="m-0 font-weight-bold text-primary">Lab Test Results
+            <a href="{{ route('staff.labtest.index') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left mx-1"></i> View All </a>       
+            @if ($data->bill->status==1)
+            <button onClick="printdiv('printable_div');" class="float-right btn btn-success btn-sm mx-1"><i class="fa fa-print"> Print Result </i></button>
+            @endif
+        </h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive" id='printable_div'>
+                <h3 class="m-0 font-weight-bold text-primary m-1">{{ $data->test->name }} </h3>
+                <table class="table table-bordered" width="100%">
+                    <thead>
+                        <th>Test Name</th>
+                        <th>Range Data</th>
+                    </thead>
+                    @php $string = 'test';$res = 'result';$nor = 'normalrange' @endphp
+                    <tbody>
+                        @for ($i=1;$i<=$totalTest;$i++)
+                        @php $temp = $string.$i;$result = $res.$i;$normalrange = $nor.$i @endphp
+                        <tr>
+                            <th>{{ $data->test->$temp }}</th>
+                            <td>{{ $data->$result }} / {{ $data->test->$normalrange }}</td>
+                        </tr>
+                        @endfor
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
 
     @section('scripts')
     <script>

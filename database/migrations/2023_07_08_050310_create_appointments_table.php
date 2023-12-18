@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->references('id')->on('users');
             $table->string('purpose');
-            $table->string('department');
             $table->string('department_id')->references('id')->on('departments');
-            $table->string('doctor');
             $table->string('doctor_id')->references('id')->on('staff');
             $table->date('date');
             $table->string('time');

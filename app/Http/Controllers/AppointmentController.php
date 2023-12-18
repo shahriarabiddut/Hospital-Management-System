@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Bill;
 use App\Models\Department;
 use App\Models\Staff;
 use App\Models\User;
@@ -54,25 +55,23 @@ class AppointmentController extends Controller
             'purpose' => 'required',
             'date' => 'required',
             'time' => 'required',
+            'user_id' => 'required',
         ]);
         $data = new Appointment();
-        $department = Department::all()->where('id', '=', $request->department)->first();
         $doctor = Staff::all()->where('id', '=', $request->doctor)->first();
         //
         $data->user_id = $request->user_id;
         $data->purpose = $request->purpose;
-        $data->department = $department->title;
-        $data->department_id = $department->id;
-        $data->doctor = $doctor->name;
-        $data->doctor_id = $doctor->id;
+        $data->department_id = $request->department;
+        $data->doctor_id = $request->doctor;
         $data->date = $request->date;
         $data->time = $request->time;
         $data->save();
         //Generate Bill
         $BillController = new BillController();
-        $BillController->appointmentBill($request->user_id, $doctor->id, $data->id);
+        $BillController->appointmentBill($request->user_id, $doctor->fee, $data->id);
 
-        return redirect('staff/appointment')->with('success', 'Appointment has been added Successfully!');
+        return redirect()->route('staff.appointment.index')->with('success', 'Appointment has been added Successfully!');
     }
 
     /**
@@ -82,6 +81,9 @@ class AppointmentController extends Controller
     {
         //
         $data = Appointment::find($id);
+        if ($data == null) {
+            return redirect()->route('staff.appointment.index')->with('danger', 'Not Found!');
+        }
         return view('staff.appointments.show', ['data' => $data]);
     }
 
@@ -108,7 +110,16 @@ class AppointmentController extends Controller
     {
         //
         $data = Appointment::find($id);
-        $data->delete();
-        return redirect('staff/appointment')->with('danger', 'Appointment Deleted!');
+        //Delete Bill
+        $BillController = new BillController();
+        $BillController->billDelete($data->id, 'appointment');
+        $statusCheck = $BillController->billDelete($data->id, 'appointment');
+        if ($statusCheck == 0) {
+            return redirect()->back()->with('danger', 'Bad Request!Warning!');
+        } else {
+            //
+            $data->delete();
+            return redirect()->route('staff.appointment.index')->with('danger', 'Appointment Deleted!');
+        }
     }
 }

@@ -19,11 +19,20 @@ Larvel Breeze
 Email Verification Enabled for user
 Login Work for all
 Registration Only For Users
-Admin CRUD for Students and Staff
+Admin CRUD for Patients and Staff
+Staff CRUD for Patients
 Database Created
 
 1. Appointment CRUD
    1.1 Appointment Bill and Print Done!
+   1.2 Delete Appointment and related Bill if not paid
+2. Test CRUD
+3. LabTest CRUD
+   3.1 LabTest Bill and Print Done!
+   3.2 Delete LabTest and related Bill if not paid
+4. Emergency CRUD
+   4.1 Emergency Bill Done!
+   4.2 Delete Emergency and related Bill if not paid
 
 ## Laravel Sponsors
 

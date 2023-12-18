@@ -1,5 +1,5 @@
 @extends('staff/layout')
-@section('title', 'Appointments')
+@section('title', 'Bills')
 
 @section('content')
 
@@ -18,8 +18,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">Appointments 
-            <a href="{{ route('staff.appointment.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h3>
+            <h3 class="m-0 font-weight-bold text-primary">Bill Data
+            <a href="{{ route('staff.bill.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Create Bill Invoice</a> </h3>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -28,24 +28,18 @@
                         <tr>
                             <th>#</th>
                             <th>Patient</th>
-                            <th>Purpose</th>
-                            <th>Department</th>
-                            <th>Date</th>
-                            <th>Time</th>
+                            <th>Service</th>
                             <th>Bill</th>
-                            <th>Action</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>#</th>
                             <th>Patient</th>
-                            <th>Purpose</th>
-                            <th>Department</th>
-                            <th>Date</th>
-                            <th>Time</th>
+                            <th>Service</th>
                             <th>Bill</th>
-                            <th>Action</th>
+                            <th>Status</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -54,21 +48,14 @@
                         <tr>
                             <td>{{ ++$key }}</td>
                             <td>{{ $d->patient->name }} ( {{ $d->patient->mobile }})</td>
-                            <td>{{ $d->purpose }}</td>
-                            <td>{{ $d->dept->title }}</td>
-                            <td>{{ $d->date }}</td>
-                            <td>{{ $d->time }}</td>
-                            @if ($d->bill->status==0)
+                            <td>{{ $d->service_type }}</td>
+                            <td>{{ $d->price }}</td>
+                            @if ($d->status==0)
                             <td class="bg-danger text-white"> Due
                             @else
                             <td class="bg-success text-white"> Paid
                             @endif
                             
-                            </td>
-                            
-                            <td width="20%" class="text-center">
-                                <a href="{{ route('staff.appointment.show',$d->id) }}" class="btn btn-info btn-sm "><i class="fa fa-print"></i> View </a>
-                                <a onclick="return confirm('Are You Sure?')" href="{{ route('staff.appointment.delete',$d->id)  }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             </td>
 
                         </tr>

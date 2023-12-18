@@ -1,17 +1,17 @@
 @extends('staff/layout')
-@section('title', 'Appointment Details')
+@section('title', 'Emergency Details')
 @section('content')
 
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">Appointment Details
-            <a href="{{ url('staff/appointment') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left mx-1"></i> View All </a>       
+            <h3 class="m-0 font-weight-bold text-primary">Emergency Details
+            <a href="{{ url('staff/emergency') }}" class="float-right btn btn-success btn-sm"> <i class="fa fa-arrow-left mx-1"></i> View All </a>       
             @if ($data->bill->status==1)
             <button onClick="printdiv('printable_div_id');" class="float-right btn btn-success btn-sm mx-1"><i class="fa fa-print"> Print </i></button>
             @else
-            <a href="{{ route('staff.appointment.bill',$data->id) }}" class="float-right btn btn-success btn-sm mx-1"><i class="fa fa-check"> Pay </i></a> 
+            <a href="{{ route('staff.emergency.bill',$data->id) }}" class="float-right btn btn-success btn-sm mx-1"><i class="fa fa-check"> Pay </i></a> 
             @endif
         </h3>
         </div>
@@ -34,11 +34,7 @@
                     <tr>
                     <tr>
                         <th>Date </th>
-                            <td>{{ $data->date}}</td>
-                    </tr>
-                    <tr>
-                        <th>Time </th>
-                            <td>{{ $data->time}}</td>
+                            <td>{{ $data->created_at}}</td>
                     </tr>
                     <tr>
                         <th>Bill Status </th>

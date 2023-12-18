@@ -1,13 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SupportController;
-use App\Http\Controllers\Staff\HomeController;
-use App\Http\Controllers\Staff\StudentController;
-use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\LabTestController;
+use App\Http\Controllers\SupportController;
+use App\Http\Controllers\EmergencyController;
+use App\Http\Controllers\Staff\HomeController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Staff\EmailController;
+use App\Http\Controllers\Staff\StudentController;
 use App\Http\Controllers\Staff\Auth\AuthenticatedSessionController;
+
 //Staff Routes
 Route::namespace('Staff')->prefix('staff')->name('staff.')->group(function () {
     Route::namespace('Auth')->middleware('guest:staff')->group(function () {
@@ -35,11 +38,22 @@ Route::middleware('staff')->prefix('staff')->name('staff.')->group(function () {
     Route::get('support/{id}', [SupportController::class, 'staffAdmin'])->name('support.show');
     Route::get('support/{id}/reply', [SupportController::class, 'staffReply'])->name('support.reply');
     Route::put('support/{id}', [SupportController::class, 'staffReplyUpdate'])->name('support.replyUpdate');
-    // Student Routes
+    // Patient Routes
     Route::get('patient/{id}/delete', [StudentController::class, 'destroy']);
     Route::resource('patient', StudentController::class);
-    //Appointment
+    //Appointment Routes
     Route::get('appointment/{id}/bill', [BillController::class, 'appointmentBillAccept'])->name('appointment.bill');
-    Route::get('appointment/{id}/delete', [AppointmentController::class, 'destroy']);
+    Route::get('appointment/{id}/delete', [AppointmentController::class, 'destroy'])->name('appointment.delete');
     Route::resource('appointment', AppointmentController::class);
+    //Appointment Routes
+    Route::get('labtest/{id}/bill', [BillController::class, 'labTestBillAccept'])->name('labtest.bill');
+    Route::get('labtest/{id}/delete', [LabTestController::class, 'destroy'])->name('labtest.delete');
+    Route::resource('labtest', LabTestController::class);
+    //Bill Routes
+    Route::post('bill/generate', [BillController::class, 'generate'])->name('bill.generate');
+    Route::resource('bill', BillController::class);
+    //Emergency Routes
+    Route::get('emergency/{id}/bill', [BillController::class, 'emergencyBillAccept'])->name('emergency.bill');
+    Route::get('emergency/{id}/delete', [EmergencyController::class, 'destroy'])->name('emergency.delete');
+    Route::resource('emergency', EmergencyController::class);
 });

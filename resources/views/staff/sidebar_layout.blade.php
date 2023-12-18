@@ -82,7 +82,24 @@
             </div>
         </div>
     </li>
-    <!-- Nav Item Support - Utilities Collapse Menu -->
+    <!-- Nav Item Appointment - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link @if (!request()->is('student/emergency*'))
+            collapsed
+        @endif" href="#" data-toggle="collapse" data-target="#collapseEmergency"
+            aria-expanded="true" aria-controls="collapseEmergency">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Emergency</span>
+        </a>
+        <div id="collapseEmergency" class="collapse @if(request()->is('staff/emergency*')) show @endif" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Emergency Management</h6>
+                <a class="collapse-item" href="{{ route('staff.emergency.index') }}">View Emergency</a>
+            </div>
+        </div>
+    </li>
+    <!-- Nav Item Appointment - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link @if (!request()->is('student/appointment*'))
             collapsed
@@ -99,6 +116,44 @@
             </div>
         </div>
     </li>
+        <!-- Nav Item LabTest - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link @if (!request()->is('student/labtest*'))
+                collapsed
+            @endif" href="#" data-toggle="collapse" data-target="#collapselabtest"
+                aria-expanded="true" aria-controls="collapselabtest">
+                <i class="fas fa-ticket-alt"></i>
+                <span>LabTest</span>
+            </a>
+            <div id="collapselabtest" class="collapse @if(request()->is('staff/labtest*')) show @endif" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">LabTest Management</h6>
+                    <a class="collapse-item" href="{{ route('staff.labtest.index') }}">View LabTests</a>
+                </div>
+            </div>
+        </li>
+    <div class="sidebar-heading">
+        Bill Management
+    </div>
+    <!-- Nav Item Bill - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link @if (!request()->is('student/bill*'))
+            collapsed
+        @endif" href="#" data-toggle="collapse" data-target="#collapsebill"
+            aria-expanded="true" aria-controls="collapsebill">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Bill</span>
+        </a>
+        <div id="collapsebill" class="collapse @if(request()->is('staff/bill*')) show @endif" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Bill Management</h6>
+                <a class="collapse-item" href="{{ route('staff.bill.index') }}">View Bills</a>
+            </div>
+        </div>
+    </li>
+    
    
 
     <!-- Divider -->
