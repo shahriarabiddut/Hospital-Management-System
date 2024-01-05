@@ -54,7 +54,7 @@ class BillController extends Controller
         return redirect()->back()->with('success', 'Appointment Bill Paid!');
     }
     //Appointment
-    public function emergencyBill(string $patient_id, string $emergency_id)
+    public function emergencyBill(string $patient_id, string $emergency_id, string $bill)
     {
         //
         $data = new Bill();
@@ -62,7 +62,7 @@ class BillController extends Controller
         $data->patient_id = $patient_id;
         $data->service_type = 'emergency';
         $data->service_id = $emergency_id;
-        $data->price = 200;
+        $data->price = $bill;
         $data->status = 0;
         $data->save();
         return 1;

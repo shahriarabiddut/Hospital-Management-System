@@ -46,21 +46,37 @@ class EmergencyController extends Controller
     {
         //
         $request->validate([
-            'patient_id' => 'required',
             'emergency' => 'required',
             'department_id' => 'required',
             'doctor_id' => 'required',
+            'bill' => 'required',
         ]);
         $data = new Emergency();
         //
-        $data->patient_id = $request->patient_id;
+        if ($request->patient_id != 0) {
+            $data->patient_id = $request->patient_id;
+        } else {
+            $lastUserId = User::latest()->value('id');
+            $emailid = $lastUserId + 1;
+            $patient = new User();
+            $patient->name = $request->name;
+            $patient->email = 'hms' . $emailid . '@hms.com';
+            $patient->password = bcrypt($request->mobile);
+            $patient->mobile = $request->mobile;
+            $patient->guardian = $request->guardian;
+            $patient->dob = $request->dob;
+            $patient->address = $request->address;
+            $patient->save();
+            //
+            $data->patient_id = $patient->id;
+        }
         $data->department_id = $request->department_id;
         $data->doctor_id = $request->doctor_id;
         $data->emergency = $request->emergency;
         $data->save();
         //Generate Bill
         $BillController = new BillController();
-        $BillController->emergencyBill($request->patient_id, $data->id);
+        $BillController->emergencyBill($request->patient_id, $data->id, $request->bill);
 
         return redirect()->route('staff.emergency.index')->with('success', 'Emergency has been added Successfully!');
     }

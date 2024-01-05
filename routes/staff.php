@@ -33,6 +33,8 @@ Route::middleware('staff')->prefix('staff')->name('staff.')->group(function () {
     Route::get('/profile', [HomeController::class, 'view'])->name('profile.view');
     Route::get('/profile/edit', [HomeController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/edit', [HomeController::class, 'update'])->name('profile.update');
+});
+Route::middleware('userType:staff')->prefix('staff')->name('staff.')->group(function () {
     //Suport Ticekts View And Reply
     Route::get('support', [SupportController::class, 'staffIndex'])->name('support.index');
     Route::get('support/{id}', [SupportController::class, 'staffAdmin'])->name('support.show');

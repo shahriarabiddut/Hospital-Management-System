@@ -22,9 +22,9 @@
 
     <hr class="sidebar-divider">
     <!-- Heading -->
-    
+    @if (Auth::guard('staff')->user()->type == 'staff')
     <div class="sidebar-heading">
-        Hall Email System
+        System Email System
     </div>
     <!-- Nav Email Services - Utilities Collapse Menu -->
     <li class="nav-item">
@@ -44,6 +44,8 @@
             </div>
         </div>
     </li>
+    
+
      <!-- Nav Item Support - Utilities Collapse Menu -->
      <li class="nav-item">
         <a class="nav-link @if (!request()->is('student/support*'))
@@ -154,7 +156,7 @@
         </div>
     </li>
     
-   
+    @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

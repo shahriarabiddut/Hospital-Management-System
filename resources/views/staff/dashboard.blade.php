@@ -6,7 +6,11 @@
 <!-- Content Row -->
 <div class="row">
 
-
+    @if(Session::has('error'))
+    <div class="p-3 ml-2 mb-2 bg-danger text-white">
+        <p>{{ session('error') }} </p>
+    </div>
+    @endif
     <!-- Pending Requests Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
