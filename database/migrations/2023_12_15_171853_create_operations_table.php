@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('operations', function (Blueprint $table) {
             $table->id();
+            $table->integer('operation_id')->references('id')->on('operation_types');
             $table->integer('patient_id')->references('id')->on('users');
             $table->integer('doctor_id')->references('id')->on('staff');
             $table->integer('admission_id')->references('id')->on('admissions');

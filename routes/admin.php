@@ -8,6 +8,11 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\DegreeController;
+use App\Http\Controllers\Admin\OperationController;
+use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\RoomTypeController;
+use App\Http\Controllers\Admin\SpecialityController;
 use App\Http\Controllers\Admin\TestController;
 
 //Admin
@@ -45,6 +50,26 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     // Test Crud 
     Route::get('test/{id}/delete', [TestController::class, 'destroy'])->name('test.delete');
     Route::resource('test', TestController::class);
+
+    // Room Type Crud 
+    Route::get('roomtype/{id}/delete', [RoomTypeController::class, 'destroy'])->name('roomtype.delete');
+    Route::resource('roomtype', RoomTypeController::class);
+
+    // Room Crud 
+    Route::get('rooms/{id}/delete', [RoomController::class, 'destroy'])->name('rooms.delete');
+    Route::resource('rooms', RoomController::class);
+
+    // Speciality Crud 
+    Route::get('speciality/{id}/delete', [SpecialityController::class, 'destroy'])->name('speciality.delete');
+    Route::resource('speciality', SpecialityController::class);
+
+    // Degree Crud 
+    Route::get('degree/{id}/delete', [DegreeController::class, 'destroy'])->name('degree.delete');
+    Route::resource('degree', DegreeController::class);
+
+    // Operation Crud 
+    Route::get('operation/{id}/delete', [OperationController::class, 'destroy'])->name('operation.delete');
+    Route::resource('operation', OperationController::class);
 
     // Staff Crud
     Route::get('staff/{id}/delete', [StaffController::class, 'destroy']);

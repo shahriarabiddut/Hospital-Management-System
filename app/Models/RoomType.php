@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Speciality extends Model
+class RoomType extends Model
 {
     use HasFactory;
-    function doctorSpeciality()
-    {
-        return $this->hasMany(DoctorSpeciality::class, 'speciality_id');
-    }
 }

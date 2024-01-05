@@ -26,7 +26,7 @@
     <div class="sidebar-heading">
         Hospital Management
    </div>
-   <!-- Nav Item Customer - Pages Collapse Menu -->
+   <!-- Nav Item Tests - Pages Collapse Menu -->
    <li class="nav-item">
        <a class="nav-link @if(!request()->is('admin/test*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapsetest"
            aria-expanded="true" aria-controls="collapsetest">
@@ -41,6 +41,82 @@
            </div>
        </div>
    </li>
+   <!-- Nav Item Operation - Pages Collapse Menu -->
+   <li class="nav-item">
+    <a class="nav-link @if(!request()->is('admin/operation*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseoperation"
+        aria-expanded="true" aria-controls="collapseoperation">
+        <i class="fas fa-fw fa-users"></i>
+        <span>Operation</span>
+    </a>
+    <div id="collapseoperation" class="collapse @if(request()->is('admin/operation*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Operation Management</h6>
+            <a class="collapse-item" href="{{ route('admin.operation.index') }}">View All</a>
+            <a class="collapse-item" href="{{ route('admin.operation.create') }}">Add new </a>
+        </div>
+    </div>
+    </li>
+   <!-- Nav Item Room Type - Pages Collapse Menu -->
+   <li class="nav-item">
+    <a class="nav-link @if(!request()->is('admin/roomtype*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseRoomType"
+        aria-expanded="true" aria-controls="collapseRoomType">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Room Type</span>
+    </a>
+    <div id="collapseRoomType" class="collapse @if(request()->is('admin/roomtype*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Room Type Management</h6>
+            <a class="collapse-item" href="{{ route('admin.roomtype.index') }}">View All</a>
+            <a class="collapse-item" href="{{ route('admin.roomtype.create') }}">Add new </a>
+        </div>
+    </div>
+    </li>
+    <!-- Nav Item Room - Pages Collapse Menu -->
+   <li class="nav-item">
+    <a class="nav-link @if(!request()->is('admin/rooms*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseroom"
+        aria-expanded="true" aria-controls="collapseroom">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Room</span>
+    </a>
+    <div id="collapseroom" class="collapse @if(request()->is('admin/rooms*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Room Management</h6>
+            <a class="collapse-item" href="{{ route('admin.rooms.index') }}">View All</a>
+            <a class="collapse-item" href="{{ route('admin.rooms.create') }}">Add new </a>
+        </div>
+    </div>
+    </li>
+    <hr class="sidebar-divider">
+    <!-- Nav Item Degree - Pages Collapse Menu -->
+   <li class="nav-item">
+    <a class="nav-link @if(!request()->is('admin/degree*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseDegree"
+        aria-expanded="true" aria-controls="collapseDegree">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Degree</span>
+    </a>
+    <div id="collapseDegree" class="collapse @if(request()->is('admin/degree*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Degree Management</h6>
+            <a class="collapse-item" href="{{ route('admin.degree.index') }}">View All</a>
+            <a class="collapse-item" href="{{ route('admin.degree.create') }}">Add new </a>
+        </div>
+    </div>
+    </li>
+    <!-- Nav Item Speciality - Pages Collapse Menu -->
+   <li class="nav-item">
+    <a class="nav-link @if(!request()->is('admin/speciality*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseSpeciality"
+        aria-expanded="true" aria-controls="collapseSpeciality">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Speciality</span>
+    </a>
+    <div id="collapseSpeciality" class="collapse @if(request()->is('admin/speciality*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Speciality Management</h6>
+            <a class="collapse-item" href="{{ route('admin.speciality.index') }}">View All</a>
+            <a class="collapse-item" href="{{ route('admin.speciality.create') }}">Add new </a>
+        </div>
+    </div>
+    </li>
     <hr class="sidebar-divider">
     <!-- Heading -->
     <div class="sidebar-heading">

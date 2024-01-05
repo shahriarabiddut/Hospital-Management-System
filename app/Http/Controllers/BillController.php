@@ -53,7 +53,7 @@ class BillController extends Controller
         $data->save();
         return redirect()->back()->with('success', 'Appointment Bill Paid!');
     }
-    //Appointment
+    //Emergency
     public function emergencyBill(string $patient_id, string $emergency_id, string $bill)
     {
         //
@@ -74,6 +74,28 @@ class BillController extends Controller
         $data->status = 1;
         $data->save();
         return redirect()->back()->with('success', 'Emergency Bill Paid!');
+    }
+    //Operation
+    public function operationBill(string $patient_id, string $operation_id, string $bill)
+    {
+        //
+        $data = new Bill();
+        //
+        $data->patient_id = $patient_id;
+        $data->service_type = 'operation';
+        $data->service_id = $operation_id;
+        $data->price = $bill;
+        $data->status = 0;
+        $data->save();
+        return 1;
+    }
+    public function operationBillAccept(string $id)
+    {
+        //
+        $data = Bill::all()->where('service_id', '=', $id)->where('service_type', '=', 'operation')->first();
+        $data->status = 1;
+        $data->save();
+        return redirect()->back()->with('success', 'Operation Bill Paid!');
     }
     /**
      * Display a listing of the resource.

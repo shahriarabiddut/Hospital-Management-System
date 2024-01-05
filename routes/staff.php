@@ -10,6 +10,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Staff\EmailController;
 use App\Http\Controllers\Staff\StudentController;
 use App\Http\Controllers\Staff\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Staff\OperationController;
 
 //Staff Routes
 Route::namespace('Staff')->prefix('staff')->name('staff.')->group(function () {
@@ -51,6 +52,10 @@ Route::middleware('userType:staff')->prefix('staff')->name('staff.')->group(func
     Route::get('labtest/{id}/bill', [BillController::class, 'labTestBillAccept'])->name('labtest.bill');
     Route::get('labtest/{id}/delete', [LabTestController::class, 'destroy'])->name('labtest.delete');
     Route::resource('labtest', LabTestController::class);
+    //Operation Routes
+    Route::get('operation/{id}/bill', [BillController::class, 'operationBillAccept'])->name('operation.bill');
+    Route::get('operation/{id}/delete', [OperationController::class, 'destroy'])->name('operation.delete');
+    Route::resource('operation', OperationController::class);
     //Bill Routes
     Route::post('bill/generate', [BillController::class, 'generate'])->name('bill.generate');
     Route::resource('bill', BillController::class);

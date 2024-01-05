@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Degree extends Model
 {
     use HasFactory;
+    function doctorDegree()
+    {
+        return $this->hasMany(DoctorDegree::class, 'degree_id');
+    }
 }

@@ -25,5 +25,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(TestSeeder::class);
         $this->call(StaffSeeder::class);
+        $this->call(RoomTypeSeeder::class);
+        $this->call(RoomSeeder::class);
+        $this->call(DegreeSeeder::class);
+        $this->call(SpecialitySeeder::class);
+        $this->call(DoctorDegreeSeeder::class);
+        $this->call(DoctorSpecialitySeeder::class);
     }
 }
