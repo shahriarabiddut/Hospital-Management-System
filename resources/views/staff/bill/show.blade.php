@@ -49,14 +49,21 @@
                             @case('emergency')
                                 Emergency
                                 @break
+                            @case('admission')
+                                Admission
+                                @break
+                            @case('operation')
+                                Operation
+                                @break
                             @default
                                 
                         @endswitch
                     </th>
-                    <td width="40%">Details : 
+                    <td width="40%">Details : <br>
                         @switch($bill->service_type)
                         @case('appointment')
-                            {{ $bill->appointment->date }} - {{ $bill->appointment->time }}
+                            Date - {{ $bill->appointment->date }} <br>
+                            Time - {{ $bill->appointment->time }}
                             @break
                         @case('test')
                             {{ $bill->labtest->test->name }} - {{ $bill->labtest->date }}
@@ -64,6 +71,29 @@
                         @case('emergency')
                             {{ $bill->emergency->emergency }} 
                             @break    
+                        @case('admission')
+                        @php
+                            $date1 = \Carbon\Carbon::parse($bill->admission->check_in);
+                            $date2 = \Carbon\Carbon::parse($bill->admission->check_out);
+                            $diff = $date1->diff($date2);
+                            $daysDifference = $diff->days;
+                            if ($daysDifference == 0) {
+                                $daysDifference = 1;
+                            }
+                        @endphp
+                            {{ $daysDifference }} Days <br>
+                            {{ $bill->admission->room_type->title }} ({{ $bill->admission->room_type->price }}/=) - Room No - {{ $bill->admission->room->title }} <br>
+                            {{ $bill->admission->seat }} seats 
+                            @break
+                        @case('operation')
+                            {{ $bill->operation->operation->title }} <br>
+                            @if ($bill->operation->ot_type == 1)
+                            Single theatre - (1000/=)
+                            @else
+                            Double theatre - (5000/=)
+                            @endif
+
+                            @break
                         @default
                             
                         @endswitch

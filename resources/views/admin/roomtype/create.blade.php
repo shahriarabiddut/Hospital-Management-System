@@ -30,7 +30,7 @@
                         <th>Seat</th>
                         <td><input required name="seat" type="number" class="form-control"></td>
                     </tr><tr>
-                        <th>Price</th>
+                        <th>Fee (per bed)</th>
                         <td><input required name="price" type="number" class="form-control"></td>
                     </tr><tr>
                         <td colspan="2">

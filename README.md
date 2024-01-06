@@ -38,6 +38,7 @@ Database Created
 7. Operation CRUD
 8. Degree CRUD
 9. Speciality CRUD
+10. Admission CRUD
 
 ## Contributing
 

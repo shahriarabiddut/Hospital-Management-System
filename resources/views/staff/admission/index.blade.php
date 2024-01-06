@@ -1,5 +1,5 @@
 @extends('staff/layout')
-@section('title', 'Operations')
+@section('title', 'Admissions')
 @section('content')
 
             <!-- Session Messages Starts -->
@@ -17,8 +17,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">Operations Data
-            <a href="{{ route('staff.operation.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h3>
+            <h3 class="m-0 font-weight-bold text-primary">Admissions Data
+            <a href="{{ route('staff.admission.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h3>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -28,10 +28,9 @@
                             <th>#</th>
                             <th>Patient</th>
                             <th>Doctor</th>
-                            <th>Operation</th>
-                            <th>Date</th>
-                            <th>Bill</th>
-                            <th>Status</th>
+                            <th>Nurse</th>
+                            <th>Check In Date</th>
+                            <th>Check Out Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -40,10 +39,9 @@
                             <th>#</th>
                             <th>Patient</th>
                             <th>Doctor</th>
-                            <th>Operation</th>
-                            <th>Date</th>
-                            <th>Bill</th>
-                            <th>Status</th>
+                            <th>Nurse</th>
+                            <th>Check In Date</th>
+                            <th>Check Out Date</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -52,22 +50,20 @@
                         @foreach ($data as $key => $d)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $d->patient->name }} - ( {{ $d->patient->mobile }})</td>
-                            <td>{{ $d->doctor->name }}</td>
-                            <td>{{ $d->operation->name }}</td>
-                            <td>{{ $d->date }}</td>
-                            <td>{{ $d->bill->price }}</td>
-                            @if ($d->bill->status==0)
-                            <td class="bg-danger text-white"> Due
+                            @if ($d->status==0)
+                            <td class="bg-success text-white"> {{ $d->patient->name }} - ( {{ $d->patient->mobile }})</td>
                             @else
-                            <td class="bg-success text-white"> Paid
+                            <td class="bg-warning text-white"> {{ $d->patient->name }} - ( {{ $d->patient->mobile }})</td>
                             @endif
-                            
-                            </td>
+                            <td>{{ $d->doctor->name }}</td>
+                            <td>{{ $d->nurse->name }}</td>
+                            <td>{{ $d->check_in }}</td>
+                            <td>{{ $d->check_out }} @if ($d->status==0)<a href="{{ route('staff.admission.edit',$d->id) }}" class="btn btn-warning btn-sm mx-1"><i class="fa fa-pen"></i> Update </a>@endif</td>
                             
                             <td class="text-center">
-                                <a href="{{ route('staff.operation.show',$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-print"></i> View </a>
-                                <a onclick="return confirm('Are You Sure?')" href="{{ route('staff.operation.delete',$d->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                <a href="{{ route('staff.admission.show',$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-print"></i> View </a>
+                                
+                                <a onclick="return confirm('Are You Sure?')" href="{{ route('staff.admission.delete',$d->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach

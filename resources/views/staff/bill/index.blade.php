@@ -31,6 +31,7 @@
                             <th>Service</th>
                             <th>Bill</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -40,6 +41,7 @@
                             <th>Service</th>
                             <th>Bill</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -55,9 +57,10 @@
                             @else
                             <td class="bg-success text-white"> Paid
                             @endif
-                            
                             </td>
-
+                            <td>
+                                <a href="{{ route('staff.bill.pay',$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-token"></i> Pay </a>
+                            </td>
                         </tr>
                         @endforeach
                         @endif

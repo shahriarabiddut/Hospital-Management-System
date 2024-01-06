@@ -19,7 +19,7 @@ class OperationController extends Controller
     public function index()
     {
         //
-        $data = Operation::all();
+        $data = Operation::latest('created_at')->get();
         return view('staff.operation.index', ['data' => $data]);
     }
 
@@ -43,7 +43,7 @@ class OperationController extends Controller
     public function create1(string $id)
     {
         //
-        $admissions = Admission::find($id);
+        $admission = Admission::find($id);
         $doctor = Staff::all()->where('type', 'doctor');
         $operation = OperationType::all();
 
@@ -52,7 +52,7 @@ class OperationController extends Controller
         $current_time = $currentDate->setTimezone('GMT+6')->format('H:i:s'); // "00:10:15"
         $nextDate = $currentDate->addDay(); // add one day to current date
         $nextDate = $nextDate->setTimezone('GMT+6')->format('Y-m-d'); // 2023-03-17
-        return view('staff.operation.create', ['nextDate' => $nextDate, 'admissions' => $admissions, 'doctor' => $doctor, 'operation' => $operation]);
+        return view('staff.operation.create1', ['nextDate' => $nextDate, 'admission' => $admission, 'doctor' => $doctor, 'operation' => $operation]);
     }
 
     /**
@@ -83,8 +83,15 @@ class OperationController extends Controller
         $data->date = $request->date;
         $data->save();
         //Generate Bill
+        if ($request->ot_type == 1) {
+            $otPrice = 1000;
+        } elseif ($request->ot_type == 2) {
+            $otPrice = 5000;
+        }
+        $operationPrice = $operation->price + $otPrice;
+
         $BillController = new BillController();
-        $BillController->operationBill($request->patient_id, $data->id, $operation->price);
+        $BillController->operationBill($request->patient_id, $data->id, $operationPrice);
         return redirect()->route('staff.operation.index')->with('success', 'Operation Added!');
     }
 

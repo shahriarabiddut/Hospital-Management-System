@@ -75,6 +75,28 @@ class BillController extends Controller
         $data->save();
         return redirect()->back()->with('success', 'Emergency Bill Paid!');
     }
+    //Admission
+    public function admissionBill(string $patient_id, string $admission_id, string $bill)
+    {
+        //
+        $data = new Bill();
+        //
+        $data->patient_id = $patient_id;
+        $data->service_type = 'admission';
+        $data->service_id = $admission_id;
+        $data->price = $bill;
+        $data->status = 0;
+        $data->save();
+        return 1;
+    }
+    public function admissionBillAccept(string $id)
+    {
+        //
+        $data = Bill::all()->where('service_id', '=', $id)->where('service_type', '=', 'admission')->first();
+        $data->status = 1;
+        $data->save();
+        return redirect()->back()->with('success', 'Admission Bill Paid!');
+    }
     //Operation
     public function operationBill(string $patient_id, string $operation_id, string $bill)
     {
@@ -124,19 +146,17 @@ class BillController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function payBill(string $id)
     {
         //
+        $data = Bill::find($id);
+        if ($data == null) {
+            return redirect()->back()->with('danger', 'Not Found!');
+        }
+        $data->status = 1;
+        $data->save();
+        return redirect()->back()->with('success', 'Bill Paid!');
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -144,6 +164,9 @@ class BillController extends Controller
     {
         //
         $data = Bill::all()->where('service_id', '=', $id)->where('service_type', '=', $service_type)->first();
+        if ($data == null) {
+            return 1;
+        }
         if ($data->status == 1) {
             return 0;
         }

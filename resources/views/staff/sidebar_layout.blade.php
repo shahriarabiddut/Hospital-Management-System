@@ -103,7 +103,7 @@
     </li>
     <!-- Nav Item Appointment - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link @if (!request()->is('student/appointment*'))
+        <a class="nav-link @if (!request()->is('staff/appointment*'))
             collapsed
         @endif" href="#" data-toggle="collapse" data-target="#collapseTen"
             aria-expanded="true" aria-controls="collapseTen">
@@ -120,7 +120,7 @@
     </li>
     <!-- Nav Item LabTest - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link @if (!request()->is('student/labtest*'))
+        <a class="nav-link @if (!request()->is('staff/labtest*'))
             collapsed
         @endif" href="#" data-toggle="collapse" data-target="#collapselabtest"
             aria-expanded="true" aria-controls="collapselabtest">
@@ -135,9 +135,26 @@
             </div>
         </div>
     </li>
+    <!-- Nav Item Admission - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link @if (!request()->is('staff/admission*'))
+            collapsed
+        @endif" href="#" data-toggle="collapse" data-target="#collapseAdmission"
+            aria-expanded="true" aria-controls="collapseAdmission">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Admission</span>
+        </a>
+        <div id="collapseAdmission" class="collapse @if(request()->is('staff/admission*')) show @endif" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Admission Management</h6>
+                <a class="collapse-item" href="{{ route('staff.admission.index') }}">View Admissions</a>
+            </div>
+        </div>
+    </li>
     <!-- Nav Item Operation - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link @if (!request()->is('student/operation*'))
+        <a class="nav-link @if (!request()->is('staff/operation*'))
             collapsed
         @endif" href="#" data-toggle="collapse" data-target="#collapseOperation"
             aria-expanded="true" aria-controls="collapseOperation">
@@ -157,7 +174,7 @@
     </div>
     <!-- Nav Item Bill - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link @if (!request()->is('student/bill*'))
+        <a class="nav-link @if (!request()->is('staff/bill*'))
             collapsed
         @endif" href="#" data-toggle="collapse" data-target="#collapsebill"
             aria-expanded="true" aria-controls="collapsebill">

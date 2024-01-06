@@ -24,4 +24,12 @@ class Admission extends Model
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
+    function room_type()
+    {
+        return $this->belongsTo(RoomType::class, 'room_type_id');
+    }
+    function bill()
+    {
+        return $this->hasOne(Bill::class, 'service_id')->where('service_type', '=', 'admission');
+    }
 }

@@ -21,7 +21,7 @@
                 <table class="table table-bordered" width="100%">
                     <tr>
                     <th>Operation Name </th>
-                    <td><h3>{{ $data->operation->name }}</h3></td>
+                    <td><h3>{{ $data->operation->title }}</h3></td>
                     </tr>
                     <tr>
                     <th>Patient Name </th>

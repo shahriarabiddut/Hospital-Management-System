@@ -16,10 +16,11 @@ return new class extends Migration
             $table->integer('patient_id')->references('id')->on('users');
             $table->integer('doctor_id')->references('id')->on('staff');
             $table->integer('nurse_id')->references('id')->on('staff');
-            $table->string('accomodation_type');
+            $table->string('room_type_id')->references('id')->on('room_types');
             $table->string('room_id')->references('id')->on('rooms');
             $table->date('check_in');
             $table->date('check_out');
+            $table->integer('seat');
             $table->timestamps();
         });
     }

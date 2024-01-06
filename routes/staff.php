@@ -7,6 +7,7 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\EmergencyController;
 use App\Http\Controllers\Staff\HomeController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Staff\AdmissionController;
 use App\Http\Controllers\Staff\EmailController;
 use App\Http\Controllers\Staff\StudentController;
 use App\Http\Controllers\Staff\Auth\AuthenticatedSessionController;
@@ -54,10 +55,18 @@ Route::middleware('userType:staff')->prefix('staff')->name('staff.')->group(func
     Route::resource('labtest', LabTestController::class);
     //Operation Routes
     Route::get('operation/{id}/bill', [BillController::class, 'operationBillAccept'])->name('operation.bill');
+    Route::get('operation/create1/{id}', [OperationController::class, 'create1'])->name('operation.create1');
     Route::get('operation/{id}/delete', [OperationController::class, 'destroy'])->name('operation.delete');
     Route::resource('operation', OperationController::class);
+    //Admission Routes
+    Route::get('admission/{id}/bill', [BillController::class, 'admissionBillAccept'])->name('admission.bill');
+    Route::get('admission/{id}/checkout', [AdmissionController::class, 'checkout'])->name('admission.checkout');
+    Route::get('admission/{id}/delete', [AdmissionController::class, 'destroy'])->name('admission.delete');
+    Route::get('booking/available-rooms/{checkin_date}', [AdmissionController::class, 'available_rooms']);
+    Route::resource('admission', AdmissionController::class);
     //Bill Routes
     Route::post('bill/generate', [BillController::class, 'generate'])->name('bill.generate');
+    Route::get('bill/pay/{id}', [BillController::class, 'payBill'])->name('bill.pay');
     Route::resource('bill', BillController::class);
     //Emergency Routes
     Route::get('emergency/{id}/bill', [BillController::class, 'emergencyBillAccept'])->name('emergency.bill');

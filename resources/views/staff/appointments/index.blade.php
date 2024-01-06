@@ -60,6 +60,7 @@
                             <td>{{ $d->time }}</td>
                             @if ($d->bill->status==0)
                             <td class="bg-danger text-white"> Due
+                                {{ $d->bill->status }}
                             @else
                             <td class="bg-success text-white"> Paid
                             @endif
