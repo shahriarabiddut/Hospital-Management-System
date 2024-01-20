@@ -19,7 +19,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h3 class="m-0 font-weight-bold text-primary">Appointments 
-            <a href="{{ route('staff.appointment.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h3>
+                @if (Auth::guard('staff')->user()->type !='doctor')
+                <a href="{{ route('staff.appointment.create') }}" class="float-right btn btn-success btn-sm" target="_blank">Add New</a> </h3> @endif
+            
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -67,10 +69,16 @@
                             
                             </td>
                             
+                            @auth('staff')
                             <td width="20%" class="text-center">
+                                @if (Auth::guard('staff')->user()->type =='doctor')
+                                <a href="{{ route('staff.appointments.show',$d->id) }}" class="btn btn-info btn-sm "><i class="fa fa-print"></i> View </a>
+                                @else
                                 <a href="{{ route('staff.appointment.show',$d->id) }}" class="btn btn-info btn-sm "><i class="fa fa-print"></i> View </a>
                                 <a onclick="return confirm('Are You Sure?')" href="{{ route('staff.appointment.delete',$d->id)  }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                @endif
                             </td>
+                            @endauth
 
                         </tr>
                         @endforeach

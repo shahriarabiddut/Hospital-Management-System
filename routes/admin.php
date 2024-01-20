@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\SpecialityController;
 use App\Http\Controllers\Admin\TestController;
+use App\Http\Controllers\Admin\MedicineController;
 
 //Admin
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
@@ -50,6 +51,9 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     // Test Crud 
     Route::get('test/{id}/delete', [TestController::class, 'destroy'])->name('test.delete');
     Route::resource('test', TestController::class);
+    // Test Crud 
+    Route::get('medicine/{id}/delete', [MedicineController::class, 'destroy'])->name('medicine.delete');
+    Route::resource('medicine', MedicineController::class);
 
     // Room Type Crud 
     Route::get('roomtype/{id}/delete', [RoomTypeController::class, 'destroy'])->name('roomtype.delete');

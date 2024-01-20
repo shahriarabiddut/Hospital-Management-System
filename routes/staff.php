@@ -42,6 +42,11 @@ Route::middleware('userType:doctor')->prefix('staff')->name('staff.')->group(fun
     Route::get('information/{id}&{information}/delete', [DoctorOptionController::class, 'destroy'])->name('information.delete');
     Route::get('information/{information}/create1', [DoctorOptionController::class, 'create1'])->name('information.create1');
     Route::resource('information', DoctorOptionController::class);
+
+    Route::get('appointments/data', [AppointmentController::class, 'indexDoctor'])->name('appointments.index');
+    Route::get('appointments/data/{id}', [AppointmentController::class, 'showDoctor'])->name('appointments.show');
+    Route::get('appointments/visit/{id}', [AppointmentController::class, 'editDoctor'])->name('appointments.edit');
+    Route::post('appointments/visit/update', [AppointmentController::class, 'updateDoctor'])->name('appointments.update');
 });
 Route::middleware('userType:staff')->prefix('staff')->name('staff.')->group(function () {
 

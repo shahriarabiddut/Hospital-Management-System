@@ -2,9 +2,9 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
-        <div class="sidebar-brand-icon rotate-n-15 col-md-4">
+        <div class="sidebar-brand-icon col-md-4">
             @isset($SiteOption)
-            <img src="{{ asset($SiteOption[1]->value) }}" alt="" srcset="" width="100%">
+            <img src="{{ asset('img/admin.png') }}" alt="" srcset="" width="100%">
             @endisset
         </div>
         <div class="sidebar-brand-text mx-2 col-md-8">Admin Panel</div>
@@ -53,6 +53,21 @@
             <h6 class="collapse-header">Operation Management</h6>
             <a class="collapse-item" href="{{ route('admin.operation.index') }}">View All</a>
             <a class="collapse-item" href="{{ route('admin.operation.create') }}">Add new </a>
+        </div>
+    </div>
+    </li>
+    <!-- Nav Item Medicine - Pages Collapse Menu -->
+   <li class="nav-item">
+    <a class="nav-link @if(!request()->is('admin/medicine*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapsemedicine"
+        aria-expanded="true" aria-controls="collapsemedicine">
+        <i class="fas fa-fw fa-users"></i>
+        <span>Medicine</span>
+    </a>
+    <div id="collapsemedicine" class="collapse @if(request()->is('admin/medicine*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Medicine Management</h6>
+            <a class="collapse-item" href="{{ route('admin.medicine.index') }}">View All</a>
+            <a class="collapse-item" href="{{ route('admin.medicine.create') }}">Add new </a>
         </div>
     </div>
     </li>

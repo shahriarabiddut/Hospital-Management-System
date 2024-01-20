@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('generic');
             $table->string('type')->nullable();
             $table->string('strength');
-            $table->integer('price');
+            $table->double('price');
             $table->timestamps();
         });
     }

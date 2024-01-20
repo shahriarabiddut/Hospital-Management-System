@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
-use App\Models\Bill;
-use App\Models\Department;
-use App\Models\Staff;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Bill;
+use App\Models\User;
+use App\Models\Staff;
+use App\Models\Department;
+use App\Models\Appointment;
+use App\Models\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -25,7 +27,11 @@ class AppointmentController extends Controller
         $data = Appointment::all();
         return view('staff.appointments.index', ['data' => $data]);
     }
-
+    public function indexDoctor()
+    {
+        $data = Appointment::all()->where('doctor_id', Auth::guard('staff')->user()->id);
+        return view('staff.appointments.index', ['data' => $data]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -86,21 +92,51 @@ class AppointmentController extends Controller
         }
         return view('staff.appointments.show', ['data' => $data]);
     }
+    public function showDoctor(string $id)
+    {
+        //
+        $data = Appointment::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $id)->first();
+        if ($data == null) {
+            return redirect()->route('staff.appointments.index')->with('danger', 'Not Found!');
+        }
+        return view('staff.appointments.showDoctor', ['data' => $data]);
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function editDoctor(string $id)
     {
         //
+        $data = Appointment::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $id)->first();
+        return view('staff.appointments.createVisit', ['data' => $data]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateDoctor(Request $request)
     {
         //
+        $request->validate([
+            'diagnosis' => 'required',
+            'prescription' => 'required',
+            'status' => 'required',
+        ]);
+        $data = new Visit();
+        $dataAppointment = Appointment::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $request->id)->first();
+        //
+        $data->diagnosis = $request->diagnosis;
+        $imgpath = $request->file('prescription')->store('PrescriptionPhoto', 'public');
+        $data->prescription = $imgpath;
+        $data->status = $request->status;
+        $data->doctor_id = $dataAppointment->doctor_id;
+        $data->patient_id = $dataAppointment->user_id;
+        $data->service_id = $dataAppointment->id;
+        $data->service_type = 'appointment';
+        $data->save();
+
+        return redirect()->route('staff.appointments.index')->with('success', 'Appointment Visit Has Been Successfully Added!');
     }
 
     /**

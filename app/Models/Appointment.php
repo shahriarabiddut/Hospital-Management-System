@@ -25,4 +25,8 @@ class Appointment extends Model
     {
         return $this->hasOne(Bill::class, 'service_id')->where('service_type', '=', 'appointment');
     }
+    function visit()
+    {
+        return $this->hasOne(Visit::class, 'service_id')->where('service_type', '=', 'appointment');
+    }
 }

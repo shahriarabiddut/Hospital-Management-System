@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('service_id')->nullable();
             $table->string('diagnosis');
             $table->string('prescription');
-            $table->integer('status');
+            $table->string('status');
             $table->timestamps();
         });
     }

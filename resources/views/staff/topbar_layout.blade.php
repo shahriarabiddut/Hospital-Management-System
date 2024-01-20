@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-    <h2 class="sidebar-brand-text mx-1" > 
+    <h4 class="sidebar-brand-text mx-1" > 
     @isset($SiteOption)
         {{ $SiteOption[2]->value }}
     @endisset 
-    </h2>
+    </h4>
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
@@ -51,7 +51,7 @@
             </div>
         </li>
 
-        <!-- Nav Item - Alerts -->
+        {{-- <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -166,7 +166,7 @@
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
             </div>
-        </li>
+        </li> --}}
 
         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -175,6 +175,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    {{ Auth::guard('staff')->user()->type }} - 
                     {{ Auth::guard('staff')->user()->name }}
                 
                 </span>

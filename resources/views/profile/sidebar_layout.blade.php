@@ -3,9 +3,9 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('student.dashboard') }}">
-        <div class="sidebar-brand-icon rotate-n-15 col-md-4">
+        <div class="sidebar-brand-icon col-md-4">
             @isset($SiteOption)
-            <img src="{{ asset($SiteOption[1]->value) }}" alt="" srcset="" width="100%">
+            <img src="{{ asset('img/patient.png') }}" alt="" srcset="" width="100%">
             @endisset
         </div>
         <div class="sidebar-brand-text mx-2 col-md-8">Patient Panel</div>

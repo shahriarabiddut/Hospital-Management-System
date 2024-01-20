@@ -2,9 +2,9 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('staff.dashboard') }}">
-        <div class="sidebar-brand-icon rotate-n-15 col-md-4">
+        <div class="sidebar-brand-icon col-md-4">
             @isset($SiteOption)
-            <img src="{{ asset($SiteOption[1]->value) }}" alt="" srcset="" width="100%">
+            <img src="{{ asset('img/staff.png') }}" alt="" srcset="" width="100%">
             @endisset
         </div>
         <div class="sidebar-brand-text mx-2 col-md-8">Staff Panel</div>
@@ -26,7 +26,7 @@
     <div class="sidebar-heading">
         Specialities
     </div>
-    <!-- Nav Email Services - Utilities Collapse Menu -->
+    <!-- Nav DOctor Info Services - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link @if (!request()->is('staff/information*'))
             collapsed
@@ -40,6 +40,23 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Info Management</h6>
                 <a class="collapse-item" href="{{ route('staff.information.index') }}">View All</a>
+            </div>
+        </div>
+    </li>
+     <!-- Nav Appointments Services - Utilities Collapse Menu -->
+     <li class="nav-item">
+        <a class="nav-link @if (!request()->is('staff/appointments*'))
+            collapsed
+        @endif" href="#" data-toggle="collapse" data-target="#collapseAppointments"
+            aria-expanded="true" aria-controls="collapseAppointments">
+            <i class="fas fa-table"></i>
+            <span>Appointments</span>
+        </a>
+        <div id="collapseAppointments" class="collapse @if(request()->is('staff/appointments*')) show @endif" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Appointments </h6>
+                <a class="collapse-item" href="{{ route('staff.appointments.index') }}">View All</a>
             </div>
         </div>
     </li>

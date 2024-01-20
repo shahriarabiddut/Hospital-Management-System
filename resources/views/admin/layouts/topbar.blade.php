@@ -1,10 +1,10 @@
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-    <h2 class="sidebar-brand-text mx-1" > 
+    <h4 class="sidebar-brand-text mx-1" > 
         @isset($SiteOption)
             {{ $SiteOption[2]->value }}
         @endisset 
-    </h2>
+    </h4>
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
