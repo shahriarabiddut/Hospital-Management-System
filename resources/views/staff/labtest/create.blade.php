@@ -28,7 +28,7 @@
                     <tr>
                         <th>Test</th>
                         <td>
-                            <select required name="test_id" class="form-control room-list">
+                            <select required name="test_id[]" class="form-control room-list" multiple>
                             <option value="0">Select Test</option>
                             @foreach ($test as $labtest)
                             <option value="{{ $labtest->id }}"> {{ $labtest->name }} - {{ $labtest->price }} Tk </option>
@@ -36,16 +36,6 @@
                             </select>
                         </td>
                     </tr>
-                        <tr>
-                            <th>Technician <span class="text-danger">*</span></th>
-                                <td><select required name="technician_id" class="form-control room-list">
-                                        <option value="0">Select Technician</option>
-                                        @foreach ($technician as $doctor)
-                                        <option value="{{ $doctor->id }}"> {{ $doctor->name }} </option>
-                                        @endforeach
-                                        </select></td>
-                            </tr>
-                        <tr>
                     <tr>
                         <th>Date</th>
                         <td><input name="date" type="date" min="{{ $nextDate }}" required class="form-control"></td>

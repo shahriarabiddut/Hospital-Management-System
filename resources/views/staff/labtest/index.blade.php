@@ -27,7 +27,6 @@
                         <tr>
                             <th>#</th>
                             <th>Patient</th>
-                            <th>Technician</th>
                             <th>Test</th>
                             <th>Date</th>
                             <th>Bill</th>
@@ -39,7 +38,6 @@
                         <tr>
                             <th>#</th>
                             <th>Patient</th>
-                            <th>Technician</th>
                             <th>Test</th>
                             <th>Date</th>
                             <th>Bill</th>
@@ -53,7 +51,6 @@
                         <tr>
                             <td>{{ ++$key }}</td>
                             <td>{{ $d->patient->name }} - ( {{ $d->patient->mobile }})</td>
-                            <td>{{ $d->technician->name }}</td>
                             <td>{{ $d->test->name }}</td>
                             <td>{{ $d->date }}</td>
                             <td>{{ $d->bill->price }}</td>

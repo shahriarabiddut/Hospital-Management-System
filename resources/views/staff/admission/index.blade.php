@@ -58,7 +58,7 @@
                             <td>{{ $d->doctor->name }}</td>
                             <td>{{ $d->nurse->name }}</td>
                             <td>{{ $d->check_in }}</td>
-                            <td>{{ $d->check_out }} @if ($d->status==0)<a href="{{ route('staff.admission.edit',$d->id) }}" class="btn btn-warning btn-sm mx-1"><i class="fa fa-pen"></i> Update </a>@endif</td>
+                            <td>@if ($d->status==0) <a href="{{ route('staff.admission.edit',$d->id) }}" class="btn btn-warning btn-sm mx-1"><i class="fa fa-pen"></i> Update </a>@else {{ $d->check_out }}  @endif</td>
                             
                             <td class="text-center">
                                 <a href="{{ route('staff.admission.show',$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-print"></i> View </a>

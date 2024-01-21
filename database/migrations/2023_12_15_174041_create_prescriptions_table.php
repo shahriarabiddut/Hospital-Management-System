@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('patient_id')->references('id')->on('users');
             $table->integer('admission_id')->nullable();
-            $table->string('type')->nullable();
             $table->integer('instruction_id');
             $table->string('instruction');
+            $table->integer('instructionperday');
             $table->string('instruction_extra')->nullable();
             $table->timestamps();
         });

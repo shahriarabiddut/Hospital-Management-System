@@ -27,11 +27,6 @@
                         <td>{{ $data->patient->name }}</td>
                     </tr>
                     <tr>
-                        <th>Technician </th>
-                            <td>{{ $data->technician->name }}</td>
-                        </tr>
-                    <tr>
-                    <tr>
                         <th>Date </th>
                             <td>{{ $data->date}}</td>
                     </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Staff;
 
+use DateTime;
 use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\User;
@@ -69,7 +70,6 @@ class AdmissionController extends Controller
             'nurse_id' => 'required',
             'room_id' => 'required',
             'check_in' => 'required',
-            'check_out' => 'required',
             'seat' => 'required',
         ]);
         // Room Type
@@ -85,7 +85,12 @@ class AdmissionController extends Controller
         $data->room_type_id = $room->room_type_id;
         $data->room_id = $request->room_id;
         $data->check_in = $request->check_in;
-        $data->check_out = $request->check_out;
+        if ($request->check_out == null) {
+            $date = new DateTime($data->check_in);
+            $date->modify('+3 month'); // or you can use '-90 day' for deduct
+            $date = $date->format('Y-m-d');
+            $data->check_out = $date;
+        }
         $data->seat = $request->seat;
         $data->status = 0;
         $data->save();

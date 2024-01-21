@@ -50,7 +50,7 @@
                              </tr>
                              <tr>
                                  <th>Check Out Date  <span class="text-danger">*</span></th>
-                                 <td><input required name="check_out" id="checkout_date" type="date" class="form-control" min=""></td>
+                                 <td><input name="check_out" id="checkout_date" type="date" class="form-control" min=""></td>
                              </tr>
                     <tr>
                         <th>Room</th>

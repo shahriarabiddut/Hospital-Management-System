@@ -30,6 +30,7 @@
                         <td>
                             <select required name="status" class="form-control">
                                 <option selected disabled="">Select Status</option>
+                                <option value="Take Admission" >Take Admission</option>
                                 <option value="Visit Again in A Week" >Visit Again in A Week</option>
                                 <option value="Visit Again in A Month">Visit Again in A Month</option>
                                 <option value="Visit Again in A Half Year" >Visit Again in Half Year</option>

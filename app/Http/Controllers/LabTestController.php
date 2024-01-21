@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Staff;
 use App\Models\LabTest;
 use App\Models\Test;
 use Illuminate\Http\Request;
@@ -28,7 +27,6 @@ class LabTestController extends Controller
     {
         //
         $patients = User::all();
-        $technician = Staff::all()->where('type', 'technician');
         $test = Test::all();
 
         //checking if its tommorow
@@ -36,7 +34,7 @@ class LabTestController extends Controller
         $current_time = $currentDate->setTimezone('GMT+6')->format('H:i:s'); // "00:10:15"
         $nextDate = $currentDate->addDay(); // add one day to current date
         $nextDate = $nextDate->setTimezone('GMT+6')->format('Y-m-d'); // 2023-03-17
-        return view('staff.labtest.create', ['nextDate' => $nextDate, 'patients' => $patients, 'technician' => $technician, 'test' => $test]);
+        return view('staff.labtest.create', ['nextDate' => $nextDate, 'patients' => $patients, 'test' => $test]);
     }
 
     /**
@@ -48,21 +46,21 @@ class LabTestController extends Controller
         $request->validate([
             'patient_id' => 'required',
             'test_id' => 'required',
-            'technician_id' => 'required',
             'date' => 'required',
         ]);
-        $data = new LabTest();
-        $test = Test::all()->where('id', '=', $request->test_id)->first();
-        //
-        $data->patient_id = $request->patient_id;
-        $data->technician_id = $request->technician_id;
-        $data->test_id = $request->test_id;
-        $data->date = $request->date;
-        $data->save();
-        //Generate Bill
-        $BillController = new BillController();
-        $BillController->labtestBill($request->patient_id, $test->price, $data->id);
-        return redirect()->route('staff.labtest.index')->with('success', 'Labtest Added!');
+        foreach ($request->test_id as $testId) {
+            $data = new LabTest();
+            $test = Test::all()->where('id', '=', $testId)->first();
+            //
+            $data->patient_id = $request->patient_id;
+            $data->test_id = $testId;
+            $data->date = $request->date;
+            $data->save();
+            //Generate Bill
+            $BillController = new BillController();
+            $BillController->labtestBill($request->patient_id, $test->price, $data->id);
+        }
+        return redirect()->route('staff.labtest.index')->with('success', '' . count($request->test_id) . ' Labtest Added!');
     }
 
     /**
