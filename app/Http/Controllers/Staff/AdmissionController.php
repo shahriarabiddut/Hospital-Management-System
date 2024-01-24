@@ -61,6 +61,11 @@ class AdmissionController extends Controller
         $data->patient_id = $dataAppointment->patient_id;
         $data->service_id = $dataAppointment->id;
         $data->service_type = 'admission';
+        ////checking if its tommorow
+        $currentDate = Carbon::now(); // get current date and time
+        $current_time = $currentDate->setTimezone('GMT+6')->format('Y-m-d H:i:s'); // "00:10:15"
+        $data->updated_at = $current_time;
+
         $data->save();
         // Bill
         $BillController = new BillController();

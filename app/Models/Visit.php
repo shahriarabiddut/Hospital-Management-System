@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Visit extends Model
 {
@@ -35,5 +36,16 @@ class Visit extends Model
     function admission()
     {
         return $this->belongsTo(Admission::class, 'service_id');
+    }
+    protected $dates = ['created_at', 'updated_at'];
+
+    public function setUpdatedAtAttribute($value)
+    {
+        $this->attributes['updated_at'] = Carbon::parse($value)->addHours(6)->toDateTimeString();
+    }
+
+    protected function asDateTime($value)
+    {
+        return parent::asDateTime($value)->addHours(6);
     }
 }
