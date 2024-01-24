@@ -42,11 +42,16 @@ Route::middleware('userType:doctor')->prefix('staff')->name('staff.')->group(fun
     Route::get('information/{id}&{information}/delete', [DoctorOptionController::class, 'destroy'])->name('information.delete');
     Route::get('information/{information}/create1', [DoctorOptionController::class, 'create1'])->name('information.create1');
     Route::resource('information', DoctorOptionController::class);
-
+    //Appointment
     Route::get('appointments/data', [AppointmentController::class, 'indexDoctor'])->name('appointments.index');
     Route::get('appointments/data/{id}', [AppointmentController::class, 'showDoctor'])->name('appointments.show');
     Route::get('appointments/visit/{id}', [AppointmentController::class, 'editDoctor'])->name('appointments.edit');
     Route::post('appointments/visit/update', [AppointmentController::class, 'updateDoctor'])->name('appointments.update');
+    //Admission Visits
+    Route::get('admissionvisits', [AdmissionController::class, 'admissionvisits'])->name('admissionvisits.index');
+    Route::get('admissionvisits/create/{id}', [AdmissionController::class, 'addVisit'])->name('admissionvisits.create');
+    Route::get('admissionvisits/show/{id}', [AdmissionController::class, 'showVisits'])->name('admissionvisit.show');
+    Route::post('admissionvisits/create/store', [AdmissionController::class, 'addVisitStore'])->name('addmission.visit');
 });
 Route::middleware('userType:staff')->prefix('staff')->name('staff.')->group(function () {
 

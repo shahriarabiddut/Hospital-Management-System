@@ -32,4 +32,8 @@ class Bill extends Model
     {
         return $this->belongsTo(Admission::class, 'service_id');
     }
+    function visit()
+    {
+        return $this->belongsTo(Visit::class, 'service_id');
+    }
 }

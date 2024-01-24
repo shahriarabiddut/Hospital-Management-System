@@ -7,11 +7,13 @@ use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Staff;
+use App\Models\Visit;
 use App\Models\RoomType;
 use App\Models\Admission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BillController;
 
 class AdmissionController extends Controller
@@ -25,7 +27,56 @@ class AdmissionController extends Controller
         $data = Admission::all();
         return view('staff.admission.index', ['data' => $data]);
     }
-
+    //Admission Visit
+    public function admissionvisits()
+    {
+        //
+        //checking if its tommorow
+        $currentDate = Carbon::now(); // get current date and time
+        $current_time = $currentDate->setTimezone('GMT+6')->format('Y-m-d'); // 2023-03-17
+        $data = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('check_out', '>=', $current_time);
+        return view('staff.admission.indexDoctor', ['data' => $data]);
+    }
+    public function addVisit(string $id)
+    {
+        //
+        $data = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $id)->first();
+        return view('staff.admission.createVisit', ['data' => $data]);
+    }
+    public function addVisitStore(Request $request)
+    {
+        //
+        $request->validate([
+            'diagnosis' => 'required',
+            'prescription' => 'required',
+            'status' => 'required',
+        ]);
+        $data = new Visit();
+        $dataAppointment = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $request->id)->first();
+        //
+        $data->diagnosis = $request->diagnosis;
+        $data->prescription = $request->prescription;
+        $data->status = $request->status;
+        $data->doctor_id = $dataAppointment->doctor_id;
+        $data->patient_id = $dataAppointment->patient_id;
+        $data->service_id = $dataAppointment->id;
+        $data->service_type = 'admission';
+        $data->save();
+        // Bill
+        $BillController = new BillController();
+        $BillController->admissionVisitBill($dataAppointment->patient_id, $data->id, 200);
+        return redirect()->route('staff.admissionvisits.index')->with('success', 'Admission Visit Has Been Successfully Added!');
+    }
+    public function showVisits(string $id)
+    {
+        //
+        $data = Visit::all()->where('service_id', $id);
+        if ($data == null) {
+            return redirect()->route('staff.appointments.index')->with('danger', 'Not Found!');
+        }
+        $patientA = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $id)->first();
+        return view('staff.admission.showDoctor', ['data' => $data, 'patientA' => $patientA]);
+    }
     /**
      * Show the form for creating a new resource.
      */

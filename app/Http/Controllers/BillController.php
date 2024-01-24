@@ -97,6 +97,28 @@ class BillController extends Controller
         $data->save();
         return redirect()->back()->with('success', 'Admission Bill Paid!');
     }
+    //Admission
+    public function admissionVisitBill(string $patient_id, string $admission_id, string $bill)
+    {
+        //
+        $data = new Bill();
+        //
+        $data->patient_id = $patient_id;
+        $data->service_type = 'admissionvisit';
+        $data->service_id = $admission_id;
+        $data->price = $bill;
+        $data->status = 0;
+        $data->save();
+        return 1;
+    }
+    public function admissionVisitBillAccept(string $id)
+    {
+        //
+        $data = Bill::all()->where('service_id', '=', $id)->where('service_type', '=', 'admissionvisit')->first();
+        $data->status = 1;
+        $data->save();
+        return redirect()->back()->with('success', 'Admission Visit Bill Paid!');
+    }
     //Operation
     public function operationBill(string $patient_id, string $operation_id, string $bill)
     {

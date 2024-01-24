@@ -32,4 +32,8 @@ class Admission extends Model
     {
         return $this->hasOne(Bill::class, 'service_id')->where('service_type', '=', 'admission');
     }
+    function visit()
+    {
+        return $this->hasMany(Visit::class, 'service_id')->where('service_type', '=', 'admission');
+    }
 }

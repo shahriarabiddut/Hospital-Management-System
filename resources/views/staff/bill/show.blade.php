@@ -55,6 +55,9 @@
                             @case('operation')
                                 Operation
                                 @break
+                            @case('admissionvisit')
+                            Admission Visit
+                            @break
                             @default
                                 
                         @endswitch
@@ -93,6 +96,9 @@
                             Double theatre - (5000/=)
                             @endif
 
+                            @break
+                        @case('admissionvisit')
+                            Visited on {{$bill->visit->created_at->format("F j, Y")}}
                             @break
                         @default
                             

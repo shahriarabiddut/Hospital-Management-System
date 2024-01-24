@@ -35,6 +35,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Bill</th>
+                            <th>Visit</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -47,6 +48,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Bill</th>
+                            <th>Visit</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -60,9 +62,16 @@
                             <td>{{ $d->dept->title }}</td>
                             <td>{{ $d->date }}</td>
                             <td>{{ $d->time }}</td>
+                            @if ($d->visit==null)
+                            <td class="bg-warning text-white"> Not Visited
+                            @else
+                            <td class="bg-info text-white"> Visited
+                            @endif
+                            
+                            </td>
                             @if ($d->bill->status==0)
                             <td class="bg-danger text-white"> Due
-                                {{ $d->bill->status }}
+                                {{ $d->bill->status }} Tk
                             @else
                             <td class="bg-success text-white"> Paid
                             @endif

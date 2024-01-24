@@ -106,8 +106,12 @@
                 </tr>
                 <tr>
                     <th>Status </th>
-                    <td class="bg-danger text-white"> {{ $data->visit->created_at }}</td>
-            </tr>
+                    <td class="bg-danger text-white"> {{ $data->visit->status }}</td>
+                </tr>
+                <tr>
+                    <th>Date </th>
+                    <td > {{ $data->visit->created_at }}</td>
+                </tr>
             </table>
         </div>
     </div>
