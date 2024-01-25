@@ -37,15 +37,15 @@ class Visit extends Model
     {
         return $this->belongsTo(Admission::class, 'service_id');
     }
-    protected $dates = ['created_at', 'updated_at'];
+    // protected $dates = ['created_at', 'updated_at'];
 
-    public function setUpdatedAtAttribute($value)
-    {
-        $this->attributes['updated_at'] = Carbon::parse($value)->addHours(6)->toDateTimeString();
-    }
+    // public function setUpdatedAtAttribute($value)
+    // {
+    //     $this->attributes['updated_at'] = Carbon::parse($value)->addHours(6)->toDateTimeString();
+    // }
 
-    protected function asDateTime($value)
-    {
-        return parent::asDateTime($value)->addHours(6);
-    }
+    // protected function asDateTime($value)
+    // {
+    //     return parent::asDateTime($value)->addHours(6);
+    // }
 }

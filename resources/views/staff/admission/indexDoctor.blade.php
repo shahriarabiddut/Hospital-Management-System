@@ -62,14 +62,15 @@
                                         $visit = 1;
                                     }
                                 }
-                            
                             @endphp
                             @if ($visit==0)
                             <td class="bg-warning text-white"> Not Visited Today <a href="{{ route('staff.admissionvisits.create',$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Visit </a>
                             @else
                             <td class="bg-info text-white"> Visited
                             @endif
-                            
+                            {{ $newFormat }}
+                            {{ $current_time }}
+                            </td>
                             <td class="text-center">
                                 <a href="{{ route('staff.admissionvisit.show',$d->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> View </a>
                             </td>

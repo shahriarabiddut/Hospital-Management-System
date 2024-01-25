@@ -73,10 +73,10 @@ class OperationController extends Controller
         $operation = OperationType::all()->where('id', '=', $request->operation_id)->first();
         //
         $data->operation_id = $request->operation_id;
-        if ($request->patient_id == null) {
-            $admissionData = Admission::find($request->admission_id);
-            $data->patient_id = $admissionData->patient_id;
-        }
+
+        $admissionData = Admission::find($request->admission_id);
+        $data->patient_id = $admissionData->patient_id;
+
         $data->doctor_id = $request->doctor_id;
         $data->admission_id = $request->admission_id;
         $data->ot_type = $request->ot_type;

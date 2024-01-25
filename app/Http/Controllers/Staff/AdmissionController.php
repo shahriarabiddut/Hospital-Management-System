@@ -34,13 +34,15 @@ class AdmissionController extends Controller
         //checking if its tommorow
         $currentDate = Carbon::now(); // get current date and time
         $current_time = $currentDate->setTimezone('GMT+6')->format('Y-m-d'); // 2023-03-17
-        $data = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('check_out', '>=', $current_time);
+        $data = Admission::all()->where('check_out', '>=', $current_time);
+        // $data = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('check_out', '>=', $current_time);
         return view('staff.admission.indexDoctor', ['data' => $data]);
     }
     public function addVisit(string $id)
     {
         //
-        $data = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $id)->first();
+        $data = Admission::all()->where('id', $id)->first();
+        // $data = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $id)->first();
         return view('staff.admission.createVisit', ['data' => $data]);
     }
     public function addVisitStore(Request $request)
@@ -52,12 +54,13 @@ class AdmissionController extends Controller
             'status' => 'required',
         ]);
         $data = new Visit();
-        $dataAppointment = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $request->id)->first();
+        $dataAppointment = Admission::all()->where('id', $request->id)->first();
+        // $dataAppointment = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $request->id)->first();
         //
         $data->diagnosis = $request->diagnosis;
         $data->prescription = $request->prescription;
         $data->status = $request->status;
-        $data->doctor_id = $dataAppointment->doctor_id;
+        $data->doctor_id = Auth::guard('staff')->user()->id;
         $data->patient_id = $dataAppointment->patient_id;
         $data->service_id = $dataAppointment->id;
         $data->service_type = 'admission';
@@ -79,7 +82,8 @@ class AdmissionController extends Controller
         if ($data == null) {
             return redirect()->route('staff.appointments.index')->with('danger', 'Not Found!');
         }
-        $patientA = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $id)->first();
+        $patientA = Admission::all()->where('id', $id)->first();
+        // $patientA = Admission::all()->where('doctor_id', Auth::guard('staff')->user()->id)->where('id', $id)->first();
         return view('staff.admission.showDoctor', ['data' => $data, 'patientA' => $patientA]);
     }
     /**

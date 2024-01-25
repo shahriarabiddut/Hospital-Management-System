@@ -25,7 +25,7 @@
                                         </select></td>
                             </tr>
                     <tr>
-                        <th>Doctor</th>
+                        <th>Duty Doctor</th>
                         <td>
                             <select required name="doctor_id" class="form-control">
                             <option value="0">Select Doctor</option>
@@ -36,7 +36,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Nurse <span class="text-danger">*</span></th>
+                        <th>Duty Nurse <span class="text-danger">*</span></th>
                             <td><select required name="nurse_id" class="form-control">
                                     <option value="0">Select Nurse</option>
                                     @foreach ($nurse as $nurses)

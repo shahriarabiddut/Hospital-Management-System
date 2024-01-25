@@ -66,7 +66,7 @@
                     </tr>
                     <tr>
                         <th>Date</th>
-                        <td><input name="date" type="date" min="{{ $nextDate }}" required class="form-control"></td>
+                        <td><input name="date" type="date" min="{{ $nextDate }}"  value="{{ $nextDate }}"  required class="form-control"></td>
                     </tr>
                     <tr>
                         <td colspan="2">
